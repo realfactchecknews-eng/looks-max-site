@@ -455,8 +455,10 @@
     border-radius: 999px;
     font-size: 13px;
     color: var(--text-dim);
+    transition: border-color .3s, color .3s;
+    cursor: pointer;
   }
-  .psl-hint a { color: var(--gold); font-weight: 600; }
+  .psl-hint:hover { border-color: var(--gold); color: #eee; }
   .psl-hint::before { content: '⚡'; }
 
   /* mobile menu toggle */
