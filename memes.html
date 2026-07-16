@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Луксмаксерские мемы — LOOKS-MAX</title>
+<meta name="description" content="Мемы про looksmaxxing-сообщество: PSL, blackpill, mewing, copium и другие внутренние шутки в фирменном стиле LOOKS-MAX.">
+<link rel="canonical" href="https://looks-max.ru/memes.html">
+<meta property="og:title" content="Луксмаксерские мемы — LOOKS-MAX">
+<meta property="og:type" content="website">
+<link rel="icon" href="logo.svg?v=2" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<style>
+  .meme-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .meme-card {
+    border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+    background: var(--bg-soft); transition: transform .4s, border-color .4s;
+  }
+  .meme-card:hover { transform: translateY(-6px); border-color: var(--gold); }
+  .meme-top {
+    padding: 30px 20px; text-align: center;
+    background: linear-gradient(155deg, #17141b, #0a090c 60%);
+    position: relative; overflow: hidden;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px; letter-spacing: 0.5px;
+    min-height: 120px; display: flex; align-items: center; justify-content: center;
+  }
+  .meme-top::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(212,175,106,0.2), transparent 55%);
+  }
+  .meme-top span { position: relative; z-index: 1; color: var(--gold-bright); }
+  .meme-bottom { padding: 20px; font-size: 14px; color: var(--text-dim); font-weight: 300; line-height: 1.6; text-align: center; }
+  .meme-tag { font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; padding: 16px 20px 0; display: block; text-align: center; }
+  @media (max-width: 900px) { .meme-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="noise"></div>
+
+<nav>
+  <a href="index.html" class="logo"><img src="logo.svg?v=2" alt="Looks-Max" width="34" height="34"><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#articles">Статьи</a>
+    <a href="celebrities.html">Рейтинг</a>
+    <a href="dictionary.html">Словарь</a>
+    <a href="memes.html">Мемы</a>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="hero" style="height:60vh;">
+  <div class="eyebrow">Community Humor</div>
+  <h1 class="title" style="font-size:clamp(48px,10vw,120px);">МЕМЫ</h1>
+  <p class="hero-sub">Внутренние шутки сообщества — если не смешно, у тебя ещё Sub5 чувство юмора.</p>
+</header>
+
+<section>
+  <div class="meme-grid">
+
+    <div class="meme-card">
+      <span class="meme-tag">Blackpill</span>
+      <div class="meme-top"><span>«Это genetics»<br>— говорит парень,<br>который не спал<br>нормально 5 лет</span></div>
+      <div class="meme-bottom">Blackpill как универсальное объяснение, вместо осанки, сна и skincare.</div>
+    </div>
+
+    <div class="meme-card">
+      <span class="meme-tag">Mewing</span>
+      <div class="meme-top"><span>Мьюинг 3 недели →<br>ждёшь Chad jawline<br>→ получаешь<br>привычку не дышать ртом</span></div>
+      <div class="meme-bottom">Реалистичные ожидания от техники, разобранной в <a href="articles/mewing.html" style="color:var(--gold)">статье про mewing</a>.</div>
+    </div>
+
+    <div class="meme-card">
+      <span class="meme-tag">PSL Copium</span>
+      <div class="meme-top"><span>«Мне занизили<br>PSL, у камеры<br>был плохой угол»</span></div>
+      <div class="meme-bottom">Классический copium — отрицание рейтинга вместо работы над собой.</div>
+    </div>
+
+    <div class="meme-card">
+      <span class="meme-tag">Frame</span>
+      <div class="meme-top"><span>Widemaxxing<br>3 месяца →<br>трапеция съела<br>шею полностью</span></div>
+      <div class="meme-bottom">Классическая ошибка из статьи про <a href="articles/frame-widemaxxing.html" style="color:var(--gold)">фрейммаксинг</a>.</div>
+    </div>
+
+    <div class="meme-card">
+      <span class="meme-tag">Bonesmashing</span>
+      <div class="meme-top"><span>«Закон Вольфа»<br>сказал парень<br>прямо перед<br>походом к хирургу</span></div>
+      <div class="meme-bottom">Почему это миф — в <a href="articles/bonesmashing.html" style="color:var(--gold)">разборе bonesmashing</a>.</div>
+    </div>
+
+    <div class="meme-card">
+      <span class="meme-tag">Ascend</span>
+      <div class="meme-top"><span>Softmax 2 недели<br>→ уже фотографирует<br>себя как<br>Chadlite</span></div>
+      <div class="meme-bottom">Прогресс реален, но ожидания стоит калибровать честно.</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="logo"><img src="logo.svg?v=2" alt="" width="26" height="26">LOOKS<span style="color:var(--gold)">-MAX</span></div>
+  <a href="dictionary.html" style="color:var(--gold)">Словарь терминов →</a>
+  <div>© 2026 looks-max.ru</div>
+</footer>
+
+<script>
+  const navBurger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  navBurger.addEventListener('click', () => { navBurger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navBurger.classList.remove('open'); navLinks.classList.remove('open'); }));
+
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+</script>
+</body>
+</html>
