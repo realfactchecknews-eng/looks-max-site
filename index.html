@@ -20,13 +20,14 @@
 
 <nav>
   <a href="#" class="logo"><img src="logo.svg" alt="Looks-Max" width="34" height="34"><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="#articles">Статьи</a>
     <a href="#tiers">Тиры</a>
     <a href="celebrities.html">Рейтинг</a>
     <a href="#categories">Категории</a>
     <a href="dictionary.html">Словарь</a>
   </div>
+  <button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button>
 </nav>
 
 <header class="hero">
@@ -260,6 +261,18 @@
 </footer>
 
 <script>
+  // mobile burger menu
+  const navBurger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  navBurger.addEventListener('click', () => {
+    navBurger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navBurger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }));
+
   // custom cursor
   const cursor = document.getElementById('cursor');
   window.addEventListener('mousemove', e => {
