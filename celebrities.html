@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рейтинг знаменитостей — LOOKS-MAX</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+  :root {
+    --gold: #d4af6a; --gold-bright: #f2d5a0;
+    --bg: #08080a; --bg-soft: #101013;
+    --line: rgba(212,175,106,0.18); --text-dim: #8a8a8f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: #f2f2f0; font-family: 'Manrope', sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--gold); color: #000; }
+
+  nav {
+    position: sticky; top: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 60px; z-index: 100;
+    background: rgba(8,8,10,0.85); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 3px; display: flex; align-items: center; gap: 10px; }
+  .logo .wordmark { display: inline-flex; align-items: baseline; }
+  .logo span { color: var(--gold); }
+  .back { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
+
+  .head { padding: 90px 60px 40px; text-align: center; }
+  .eyebrow { font-size: 12px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif; font-size: clamp(44px, 8vw, 90px);
+    background: linear-gradient(180deg, #fff 20%, var(--gold-bright) 60%, var(--gold) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    line-height: 0.95;
+  }
+  .head p { color: var(--text-dim); max-width: 620px; margin: 22px auto 0; font-weight: 300; }
+
+  .disclaimer {
+    max-width: 720px; margin: 30px auto 0;
+    padding: 16px 24px;
+    border: 1px solid var(--line); border-radius: 14px;
+    font-size: 13px; color: var(--text-dim); text-align: left;
+  }
+  .disclaimer b { color: var(--gold); }
+
+  .wrap { max-width: 980px; margin: 0 auto; padding: 20px 60px 100px; }
+
+  table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+  thead th {
+    background: var(--bg-soft); text-align: left; padding: 18px 20px;
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold);
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td { padding: 20px; border-bottom: 1px solid var(--line); font-size: 15px; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-soft); }
+  .name { font-weight: 700; }
+  .role { display: block; font-size: 12px; color: var(--text-dim); font-weight: 300; margin-top: 2px; }
+  .score { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--gold-bright); }
+  .gap { font-size: 13px; }
+  .gap.pos { color: #6ee7a0; }
+  .gap.neg { color: #ff7a7a; }
+  .gap.zero { color: var(--text-dim); }
+
+  .legend { margin-top: 30px; font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .legend b { color: var(--gold); }
+
+  .psl-hint {
+    display: flex; align-items: center; gap: 10px; margin-top: 26px;
+    padding: 16px 22px; border: 1px solid var(--line); border-radius: 14px;
+    font-size: 13px; color: var(--text-dim); background: var(--bg-soft);
+  }
+  .psl-hint a { color: var(--gold); font-weight: 600; }
+  .psl-hint::before { content: '⚡'; }
+
+  footer { padding: 50px 60px; border-top: 1px solid var(--line); text-align: center; color: var(--text-dim); font-size: 13px; }
+
+  @media (max-width: 800px) {
+    nav, .head, .wrap { padding-left: 24px; padding-right: 24px; }
+    table, thead, tbody, th, td, tr { display: block; }
+    thead { display: none; }
+    tbody tr { border-bottom: 1px solid var(--line); padding: 16px 0; }
+    tbody td { border: none; padding: 6px 0; }
+    tbody td::before { content: attr(data-label); display: block; font-size: 11px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><img src="logo.svg" width="30" height="30" alt=""><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
+  <a href="index.html" class="back">← На главную</a>
+</nav>
+
+<div class="head">
+  <div class="eyebrow">Community Ratings</div>
+  <h1>PSL vs APPEAL</h1>
+  <p>Сравнение двух шкал на примере известных публичных людей — чтобы наглядно показать, где заканчивается чистая геометрия лица (PSL) и начинается общее впечатление (Appeal).</p>
+  <div class="disclaimer"><b>Дисклеймер:</b> оценки ниже — субъективное мнение редакции и сообщества для иллюстрации разницы шкал, а не научный факт и не медицинское заключение. Это развлекательный контент в жанре, который уже существует в сообществе (см. leaderboard-форматы вроде officialchadrankings.com).</div>
+</div>
+
+<div class="wrap">
+  <table>
+    <thead>
+      <tr><th>Персона</th><th>PSL</th><th>Appeal</th><th>Разница</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Персона"><span class="name">Brad Pitt</span><span class="role">актёр</span></td>
+        <td data-label="PSL"><span class="score">8.2</span></td>
+        <td data-label="Appeal"><span class="score">9.0</span></td>
+        <td data-label="Разница"><span class="gap pos">+0.8 — харизма и статус тянут Appeal выше PSL</span></td>
+      </tr>
+      <tr>
+        <td data-label="Персона"><span class="name">Timothée Chalamet</span><span class="role">актёр</span></td>
+        <td data-label="PSL"><span class="score">8.0</span></td>
+        <td data-label="Appeal"><span class="score">8.3</span></td>
+        <td data-label="Разница"><span class="gap pos">+0.3 — стиль и подача слегка усиливают базу</span></td>
+      </tr>
+      <tr>
+        <td data-label="Персона"><span class="name">Henry Cavill</span><span class="role">актёр</span></td>
+        <td data-label="PSL"><span class="score">8.6</span></td>
+        <td data-label="Appeal"><span class="score">8.6</span></td>
+        <td data-label="Разница"><span class="gap zero">0 — редкий случай, когда шкалы совпадают</span></td>
+      </tr>
+      <tr>
+        <td data-label="Персона"><span class="name">Zendaya</span><span class="role">актриса</span></td>
+        <td data-label="PSL"><span class="score">8.4</span></td>
+        <td data-label="Appeal"><span class="score">9.1</span></td>
+        <td data-label="Разница"><span class="gap pos">+0.7 — стиль и медиа-присутствие двигают Appeal сильно вверх</span></td>
+      </tr>
+      <tr>
+        <td data-label="Персона"><span class="name">Margot Robbie</span><span class="role">актриса</span></td>
+        <td data-label="PSL"><span class="score">8.5</span></td>
+        <td data-label="Appeal"><span class="score">8.9</span></td>
+        <td data-label="Разница"><span class="gap pos">+0.4 — харизма чуть выше и без того сильного PSL</span></td>
+      </tr>
+      <tr>
+        <td data-label="Персона"><span class="name">Michael B. Jordan</span><span class="role">актёр</span></td>
+        <td data-label="PSL"><span class="score">8.3</span></td>
+        <td data-label="Appeal"><span class="score">8.7</span></td>
+        <td data-label="Разница"><span class="gap pos">+0.4 — фрейм и уверенность добавляют баллы сверху</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="legend">
+    <b>Как читать таблицу:</b> PSL — это только лицо (симметрия, кости, гармония черт), Appeal — общее впечатление с учётом тела, стиля, харизмы и медийной подачи. Положительная разница означает, что харизма/стиль тянут восприятие вверх сильнее, чем «сырая» геометрия лица. Нулевая или отрицательная разница — редкость, обычно у людей с уже топовым PSL расти особо некуда.
+  </div>
+
+  <div class="psl-hint">Хочешь узнать свой PSL и Appeal — сделай честный тест на <a href="https://facerate.ru" target="_blank">facerate.ru</a></div>
+</div>
+
+<footer>© 2026 looks-max.ru — рейтинг обновляется по мере обсуждений в сообществе</footer>
+
+</body>
+</html>

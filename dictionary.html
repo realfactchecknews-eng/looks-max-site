@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Словарь — LOOKS-MAX</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --gold: #d4af6a;
+    --gold-bright: #f2d5a0;
+    --bg: #08080a;
+    --bg-soft: #101013;
+    --line: rgba(212,175,106,0.18);
+    --text-dim: #8a8a8f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: #f2f2f0;
+    font-family: 'Manrope', sans-serif;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--gold); color: #000; }
+
+  nav {
+    position: sticky; top: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 60px;
+    z-index: 100;
+    background: rgba(8,8,10,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 3px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .logo .wordmark { display: inline-flex; align-items: baseline; }
+  .logo span { color: var(--gold); }
+  .back { font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); }
+
+  .head {
+    padding: 90px 60px 50px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-size: 12px; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 9vw, 100px);
+    background: linear-gradient(180deg, #fff 20%, var(--gold-bright) 60%, var(--gold) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    line-height: 0.95;
+  }
+  .head p { color: var(--text-dim); max-width: 560px; margin: 22px auto 0; font-weight: 300; }
+
+  .search-wrap { max-width: 480px; margin: 36px auto 0; }
+  #search {
+    width: 100%;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 14px 24px;
+    color: #fff; font-size: 14px;
+    font-family: 'Manrope', sans-serif;
+    outline: none;
+  }
+  #search:focus { border-color: var(--gold); }
+
+  .tags {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin-top: 22px;
+  }
+  .tag {
+    padding: 8px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer;
+    transition: all .25s;
+    background: none; color: var(--text-dim);
+    font-family: 'Manrope', sans-serif;
+  }
+  .tag:hover, .tag.active { border-color: var(--gold); color: var(--gold); }
+
+  .terms {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 60px 140px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .term {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px;
+    transition: border-color .3s, transform .3s;
+  }
+  .term:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .term-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .term h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; letter-spacing: 0.5px;
+    color: var(--gold-bright);
+  }
+  .term .cat {
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-dim);
+    border: 1px solid var(--line);
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .term p { font-size: 14px; color: #cfcfd2; font-weight: 300; line-height: 1.6; }
+  .term.hidden { display: none; }
+
+  footer {
+    padding: 50px 60px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    color: var(--text-dim); font-size: 13px;
+  }
+
+  .psl-hint {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 22px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    font-size: 13px;
+    color: var(--text-dim);
+    background: var(--bg-soft);
+  }
+  .psl-hint a { color: var(--gold); font-weight: 600; }
+  .psl-hint::before { content: '⚡'; }
+  .term .scale { font-size: 12px; color: var(--gold); margin-top: 8px; display: block; }
+
+  @media (max-width: 800px) {
+    .terms { grid-template-columns: 1fr; padding-left: 24px; padding-right: 24px; }
+    nav, .head { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><img src="logo.svg" width="30" height="30" alt=""><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
+  <a href="index.html" class="back">← На главную</a>
+</nav>
+
+<div class="head">
+  <div class="eyebrow">Chad Lexicon</div>
+  <h1>СЛОВАРЬ</h1>
+  <p>Термины looksmaxxing-сообщества простыми словами — чтобы не плавать, когда в статье встречается «мог» или «канфал тилт».</p>
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="Найти термин...">
+  </div>
+  <div class="tags">
+    <button class="tag active" data-cat="all">Все</button>
+    <button class="tag" data-cat="tier">Тиры</button>
+    <button class="tag" data-cat="face">Лицо</button>
+    <button class="tag" data-cat="body">Тело</button>
+    <button class="tag" data-cat="mindset">Мышление</button>
+    <button class="tag" data-cat="slang">Сленг</button>
+  </div>
+</div>
+
+<div class="terms" id="terms">
+
+  <div class="term" data-cat="tier"><div class="term-head"><h3>Sub5</h3><span class="cat">тир</span></div><p>Нижний тир шкалы: заметные диспропорции черт. Условность сообщества, не диагноз и не медицинский факт.<span class="scale">&lt; 5 / 10 по PSL</span></p></div>
+  <div class="term" data-cat="tier"><div class="term-head"><h3>LTN</h3><span class="cat">тир</span></div><p>Low-Tier Normie. Чуть ниже среднего или ровно среднее лицо, теряется в толпе, без выраженных плюсов и минусов.<span class="scale">≈ 5 / 10 по PSL, около 25% людей</span></p></div>
+  <div class="term" data-cat="tier"><div class="term-head"><h3>MTN</h3><span class="cat">тир</span></div><p>Mid-Tier Normie. Ровно средний или чуть выше среднего уровень — ничего яркого ни в плюс, ни в минус.<span class="scale">≈ 5.5 / 10 по PSL, около 30% людей</span></p></div>
+  <div class="term" data-cat="tier"><div class="term-head"><h3>HTN</h3><span class="cat">тир</span></div><p>High-Tier Normie. Выше среднего, заметный фрейм или гармония черт, обращает на себя внимание.<span class="scale">≈ 6–6.5 / 10 по PSL, около 15% людей</span></p></div>
+  <div class="term" data-cat="tier"><div class="term-head"><h3>Chadlite</h3><span class="cat">тир</span></div><p>Явно привлекательная внешность, сильный фрейм или черты лица — но не абсолютный пик иерархии.<span class="scale">≈ 7 / 10 по PSL, топ 5%</span></p></div>
+  <div class="term" data-cat="tier"><div class="term-head"><h3>Chad</h3><span class="cat">тир</span></div><p>Пик мужской эстетической иерархии в терминологии сообщества: гармония, уверенность, социальное доминирование.<span class="scale">8+ / 10 по PSL, около 1%</span></p></div>
+  <div class="term" data-cat="tier"><div class="term-head"><h3>True Adam / True Eve</h3><span class="cat">тир</span></div><p>Шуточный «единственный в мире» идеал 10/10 — статистическая гипербола, а не реальная категория.</p></div>
+  <div class="term" data-cat="tier"><div class="term-head"><h3>Stacy / Stacylite</h3><span class="cat">тир</span></div><p>Женские аналоги Chad / Chadlite в той же шкале.</p></div>
+
+  <div class="term" data-cat="face"><div class="term-head"><h3>Canthal Tilt</h3><span class="cat">лицо</span></div><p>Угол наклона внешнего уголка глаза относительно внутреннего. Положительный (приподнятый) тилт считается более привлекательным.</p></div>
+  <div class="term" data-cat="face"><div class="term-head"><h3>Hunter Eyes</h3><span class="cat">лицо</span></div><p>Глубоко посаженные, узкие глаза с положительным канфал тилтом — «хищный» и мужественный взгляд.</p></div>
+  <div class="term" data-cat="face"><div class="term-head"><h3>Gonial Angle</h3><span class="cat">лицо</span></div><p>Угол нижней челюсти. Чем он острее (ближе к 90°), тем более выраженным и мужественным выглядит джавлайн.</p></div>
+  <div class="term" data-cat="face"><div class="term-head"><h3>Zygos</h3><span class="cat">лицо</span></div><p>Скуловые кости. Высокие, выступающие скулы добавляют лицу структуру и выразительную светотень.</p></div>
+  <div class="term" data-cat="face"><div class="term-head"><h3>Maxilla</h3><span class="cat">лицо</span></div><p>Верхняя челюсть. Хорошо развитая вперёд максилла даёт проекцию лица — ключевой фактор гармонии.</p></div>
+  <div class="term" data-cat="face"><div class="term-head"><h3>Facial Thirds</h3><span class="cat">лицо</span></div><p>Условное деление лица на три равные зоны: лоб-брови, брови-нос, нос-подбородок. Идеал — равные трети.</p></div>
+  <div class="term" data-cat="face"><div class="term-head"><h3>Mewing</h3><span class="cat">лицо</span></div><p>Техника позиционирования языка к нёбу — предположительно влияет на форму челюсти со временем. Предмет споров об эффективности.</p></div>
+
+  <div class="term" data-cat="body"><div class="term-head"><h3>Frame</h3><span class="cat">тело</span></div><p>Ширина плеч и общая скелетная структура. Широкий фрейм — один из самых желанных мужских признаков.</p></div>
+  <div class="term" data-cat="body"><div class="term-head"><h3>Gymcel</h3><span class="cat">тело</span></div><p>Тот, кто серьёзно качается и имеет впечатляющую форму, но всё ещё испытывает трудности из-за лица или софт-скиллов.</p></div>
+  <div class="term" data-cat="body"><div class="term-head"><h3>Bonesmashing</h3><span class="cat">тело</span></div><p>Опасный и не подтверждённый наукой «метод» ударов по костям лица якобы для их укрепления. Не рекомендуется, это не техника, а миф.</p></div>
+
+  <div class="term" data-cat="mindset"><div class="term-head"><h3>Blackpill</h3><span class="cat">мышление</span></div><p>Убеждение, что генетика — главный определяющий фактор успеха в отношениях, сильнее усилий и личности.</p></div>
+  <div class="term" data-cat="mindset"><div class="term-head"><h3>Halo Effect</h3><span class="cat">мышление</span></div><p>Психологический эффект: привлекательным людям автоматически приписывают другие положительные качества.</p></div>
+  <div class="term" data-cat="mindset"><div class="term-head"><h3>Harmony</h3><span class="cat">мышление</span></div><p>То, насколько хорошо сочетаются отдельные черты лица между собой — важнее, чем каждая черта по отдельности.</p></div>
+  <div class="term" data-cat="mindset"><div class="term-head"><h3>Dimorphism</h3><span class="cat">мышление</span></div><p>Половой диморфизм — выраженность отличий мужских/женских черт лица. Более выраженный диморфизм часто воспринимается как более привлекательный.</p></div>
+
+  <div class="term" data-cat="slang"><div class="term-head"><h3>PSL</h3><span class="cat">сленг</span></div><p>Шкала 1–10 для оценки чисто лицевой эстетики: симметрия, костная структура, гармония черт. Не учитывает тело, стиль или харизму — только лицо.</p></div>
+  <div class="term" data-cat="slang"><div class="term-head"><h3>Appeal</h3><span class="cat">сленг</span></div><p>Более широкая шкала 1–10: общая «привлекательность» человека целиком — лицо + тело + стиль + харизма + подача. Appeal и PSL путают именно потому, что оба измеряются в баллах 1–10, но PSL — это только геометрия лица, а Appeal — то, как человека воспринимают в реальной жизни. Можно иметь среднее лицо (PSL 6), но высокий Appeal (8) за счёт стиля, формы и уверенности — и наоборот.</p></div>
+  <div class="psl-hint">Точный PSL и Appeal по фото можно получить на <a href="https://facerate.ru" target="_blank">facerate.ru</a></div>
+  <div class="term" data-cat="slang"><div class="term-head"><h3>Mog / Mogging</h3><span class="cat">сленг</span></div><p>Заметно превосходить кого-то внешностью, статусом или presence. «Он могнул всех в комнате».</p></div>
+  <div class="term" data-cat="slang"><div class="term-head"><h3>Ascend</h3><span class="cat">сленг</span></div><p>Заметно вырасти во внешности или статусе — перейти на тир выше в иерархии.</p></div>
+  <div class="term" data-cat="slang"><div class="term-head"><h3>Rizz</h3><span class="cat">сленг</span></div><p>Харизма и умение привлекать людей за счёт личности и подачи, а не только внешности.</p></div>
+  <div class="term" data-cat="slang"><div class="term-head"><h3>Jestermaxxing</h3><span class="cat">сленг</span></div><p>Компенсировать недостаток внешности чрезмерным юмором и клоунадой ради внимания.</p></div>
+  <div class="term" data-cat="slang"><div class="term-head"><h3>Rankshift</h3><span class="cat">сленг</span></div><p>Заметное изменение позиции во внешностной иерархии — в плюс или в минус.</p></div>
+
+</div>
+
+<footer>© 2026 looks-max.ru — словарь обновляется еженедельно</footer>
+
+<script>
+  const search = document.getElementById('search');
+  const terms = document.querySelectorAll('.term');
+  const tags = document.querySelectorAll('.tag');
+  let activeCat = 'all';
+
+  function filter() {
+    const q = search.value.trim().toLowerCase();
+    terms.forEach(t => {
+      const matchesCat = activeCat === 'all' || t.dataset.cat === activeCat;
+      const matchesQuery = t.innerText.toLowerCase().includes(q);
+      t.classList.toggle('hidden', !(matchesCat && matchesQuery));
+    });
+  }
+
+  search.addEventListener('input', filter);
+  tags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      tags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+      activeCat = tag.dataset.cat;
+      filter();
+    });
+  });
+</script>
+
+</body>
+</html>
