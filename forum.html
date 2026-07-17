@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(110802287, "init", {
+        ssr:true,
+        webvisor:true,
+        clickmap:true,
+        ecommerce:"dataLayer",
+        accurateTrackBounce:true,
+        trackLinks:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110802287" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Форум — LOOKS-MAX</title>
+<meta name="description" content="Форум looksmaxxing-сообщества LOOKS-MAX: обсуждения, разборы, вопросы.">
+<link rel="canonical" href="https://looks-max.ru/forum.html">
+<link rel="icon" href="logo.svg?v=2" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<style>
+  .forum-wrap { max-width: 720px; margin: 0 auto; padding: 160px 24px 120px; }
+  .auth-box {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    padding: 20px; border: 1px solid var(--line); border-radius: 16px;
+    background: var(--bg-soft); margin-bottom: 40px;
+  }
+  .auth-box input {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 14px; color: #fff; font-size: 14px; font-family: 'Manrope', sans-serif;
+    flex: 1; min-width: 140px; outline: none;
+  }
+  .auth-box input:focus { border-color: var(--gold); }
+  .btn-sm {
+    padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: none; font-family: 'Manrope', sans-serif;
+  }
+  .btn-sm.solid { background: linear-gradient(120deg, var(--gold-bright), var(--gold)); color: #100b02; }
+  .btn-sm.outline { background: none; border: 1px solid var(--line); color: #eee; }
+  .btn-sm.outline:hover { border-color: var(--gold); }
+  .user-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .user-bar span { color: var(--text-dim); font-size: 14px; }
+  .post-form { display: none; margin-bottom: 40px; }
+  .post-form textarea {
+    width: 100%; min-height: 90px; resize: vertical;
+    background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px;
+    padding: 16px; color: #fff; font-family: 'Manrope', sans-serif; font-size: 14px; outline: none;
+    margin-bottom: 12px;
+  }
+  .post-form textarea:focus { border-color: var(--gold); }
+  .post {
+    padding: 20px; border: 1px solid var(--line); border-radius: 14px;
+    background: var(--bg-soft); margin-bottom: 14px;
+  }
+  .post .meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--gold); margin-bottom: 8px; }
+  .post .body { font-size: 14px; color: #d8d8db; line-height: 1.6; white-space: pre-wrap; }
+  .status-msg { color: var(--text-dim); font-size: 13px; text-align: center; padding: 20px 0; }
+  .error-msg { color: #ff7a7a; font-size: 13px; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+
+<nav>
+  <a href="index.html" class="logo"><img src="logo.svg?v=2" alt="Looks-Max" width="34" height="34"><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html#articles">Статьи</a>
+    <a href="dictionary.html">Словарь</a>
+    <a href="celebrities.html">Рейтинг</a>
+    <a href="forum.html">Форум</a>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="forum-wrap">
+  <div class="article-eyebrow">Community</div>
+  <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,7vw,56px); margin-bottom:30px; background:linear-gradient(180deg,#fff 20%,var(--gold-bright) 60%,var(--gold) 100%); -webkit-background-clip:text; background-clip:text; color:transparent;">ФОРУМ</h1>
+
+  <!-- Форма входа/регистрации (видна, когда не залогинен) -->
+  <div class="auth-box" id="authBox">
+    <input type="email" id="emailInput" placeholder="Email">
+    <input type="password" id="passInput" placeholder="Пароль">
+    <button class="btn-sm solid" id="loginBtn">Войти</button>
+    <button class="btn-sm outline" id="registerBtn">Регистрация</button>
+  </div>
+  <div class="error-msg" id="authError"></div>
+
+  <!-- Панель залогиненного пользователя -->
+  <div class="user-bar" id="userBar" style="display:none;">
+    <span>Ты вошёл как <strong id="userEmail" style="color:#fff;"></strong></span>
+    <button class="btn-sm outline" id="logoutBtn">Выйти</button>
+  </div>
+
+  <!-- Форма поста -->
+  <div class="post-form" id="postForm">
+    <textarea id="postText" placeholder="Что обсуждаем?"></textarea>
+    <button class="btn-sm solid" id="submitPost">Опубликовать</button>
+    <div class="error-msg" id="postError"></div>
+  </div>
+
+  <!-- Лента постов -->
+  <div id="feed">
+    <div class="status-msg">Загрузка обсуждений…</div>
+  </div>
+</div>
+
+<footer>
+  <div class="logo"><img src="logo.svg?v=2" alt="" width="26" height="26">LOOKS<span style="color:var(--gold)">-MAX</span></div>
+  <a href="terms.html" style="color:var(--gold)">Соглашение</a>
+  <div>© 2026 looks-max.ru</div>
+</footer>
+
+<!-- Firebase SDK (compat, без сборщика) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+<script>
+  // ЗАМЕНИ на свой конфиг из Firebase Console → Project settings → Your apps → Web app
+  const firebaseConfig = {
+    apiKey: "ВСТАВЬ_СЮДА",
+    authDomain: "ВСТАВЬ_СЮДА.firebaseapp.com",
+    projectId: "ВСТАВЬ_СЮДА",
+    storageBucket: "ВСТАВЬ_СЮДА.appspot.com",
+    messagingSenderId: "ВСТАВЬ_СЮДА",
+    appId: "ВСТАВЬ_СЮДА"
+  };
+
+  let app, auth, db;
+  let firebaseReady = false;
+  try {
+    app = firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
+    db = firebase.firestore();
+    firebaseReady = true;
+  } catch (e) {
+    console.error('Firebase init failed', e);
+  }
+
+  const authBox = document.getElementById('authBox');
+  const authError = document.getElementById('authError');
+  const userBar = document.getElementById('userBar');
+  const userEmail = document.getElementById('userEmail');
+  const postForm = document.getElementById('postForm');
+  const feed = document.getElementById('feed');
+
+  if (!firebaseReady || firebaseConfig.apiKey === "ВСТАВЬ_СЮДА") {
+    feed.innerHTML = '<div class="status-msg">Форум ещё не подключён к базе данных. Владелец сайта: вставь конфиг Firebase в &lt;script&gt; внизу forum.html.</div>';
+  } else {
+    document.getElementById('registerBtn').addEventListener('click', () => {
+      const email = document.getElementById('emailInput').value.trim();
+      const pass = document.getElementById('passInput').value;
+      authError.textContent = '';
+      auth.createUserWithEmailAndPassword(email, pass)
+        .catch(err => authError.textContent = err.message);
+    });
+
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const email = document.getElementById('emailInput').value.trim();
+      const pass = document.getElementById('passInput').value;
+      authError.textContent = '';
+      auth.signInWithEmailAndPassword(email, pass)
+        .catch(err => authError.textContent = err.message);
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
+
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        authBox.style.display = 'none';
+        userBar.style.display = 'flex';
+        postForm.style.display = 'block';
+        userEmail.textContent = user.email;
+      } else {
+        authBox.style.display = 'flex';
+        userBar.style.display = 'none';
+        postForm.style.display = 'none';
+      }
+    });
+
+    document.getElementById('submitPost').addEventListener('click', () => {
+      const text = document.getElementById('postText').value.trim();
+      const postError = document.getElementById('postError');
+      postError.textContent = '';
+      if (!text) return;
+      const user = auth.currentUser;
+      if (!user) return;
+      db.collection('posts').add({
+        text: text,
+        author: user.email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        document.getElementById('postText').value = '';
+      }).catch(err => postError.textContent = err.message);
+    });
+
+    db.collection('posts').orderBy('createdAt', 'desc').limit(50)
+      .onSnapshot(snapshot => {
+        if (snapshot.empty) {
+          feed.innerHTML = '<div class="status-msg">Пока пусто — стань первым, кто напишет.</div>';
+          return;
+        }
+        feed.innerHTML = '';
+        snapshot.forEach(doc => {
+          const post = doc.data();
+          const time = post.createdAt ? post.createdAt.toDate().toLocaleString('ru-RU') : '...';
+          const div = document.createElement('div');
+          div.className = 'post';
+          div.innerHTML = `<div class="meta"><span>${post.author || 'аноним'}</span><span>${time}</span></div><div class="body"></div>`;
+          div.querySelector('.body').textContent = post.text;
+          feed.appendChild(div);
+        });
+      }, err => {
+        feed.innerHTML = '<div class="status-msg">Ошибка загрузки: ' + err.message + '</div>';
+      });
+  }
+
+  // mobile burger
+  const navBurger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  navBurger.addEventListener('click', () => { navBurger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navBurger.classList.remove('open'); navLinks.classList.remove('open'); }));
+
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+</script>
+</body>
+</html>
