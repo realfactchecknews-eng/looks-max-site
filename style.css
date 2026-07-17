@@ -486,6 +486,12 @@
     .featured { grid-template-columns: 1fr; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     nav, section, footer { padding-left: 24px; padding-right: 24px; }
+    nav {
+      mix-blend-mode: normal;
+      background: rgba(8,8,10,0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
     .nav-burger { display: flex; }
     .nav-links {
       position: fixed; top: 0; right: 0;
