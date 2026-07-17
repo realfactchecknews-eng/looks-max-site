@@ -93,6 +93,7 @@
     <input type="password" id="passInput" placeholder="Пароль">
     <button class="btn-sm solid" id="loginBtn">Войти</button>
     <button class="btn-sm outline" id="registerBtn">Регистрация</button>
+    <button class="btn-sm outline" id="googleBtn">Войти через Google</button>
   </div>
   <div class="error-msg" id="authError"></div>
 
@@ -176,6 +177,13 @@
     });
 
     document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
+
+    document.getElementById('googleBtn').addEventListener('click', () => {
+      authError.textContent = '';
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .catch(err => authError.textContent = err.message);
+    });
 
     auth.onAuthStateChanged(user => {
       if (user) {
