@@ -270,9 +270,10 @@
     <h2>Будь в теме</h2>
     <p>Раз в неделю — самые важные статьи и разборы трендов, без спама.</p>
     <div class="newsletter-form">
-      <input type="email" placeholder="you@email.com">
-      <a href="#" class="btn btn-solid">Подписаться</a>
+      <input type="email" id="subscribeEmail" placeholder="you@email.com">
+      <button type="button" class="btn btn-solid" id="subscribeBtn">Подписаться</button>
     </div>
+    <div id="subscribeMsg" style="margin-top:14px; font-size:13px; color:var(--text-dim);"></div>
   </div>
 </section>
 
@@ -317,6 +318,46 @@
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // newsletter subscribe (Firestore)
+  document.getElementById('subscribeBtn').addEventListener('click', () => {
+    const emailInput = document.getElementById('subscribeEmail');
+    const msg = document.getElementById('subscribeMsg');
+    const email = emailInput.value.trim();
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!re.test(email)) {
+      msg.style.color = '#ff7a7a';
+      msg.textContent = 'Введи корректный email';
+      return;
+    }
+    msg.style.color = 'var(--text-dim)';
+    msg.textContent = 'Добавляем...';
+    firebase.firestore().collection('subscribers').add({
+      email: email,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+      msg.style.color = '#6ee7a0';
+      msg.textContent = 'Готово — ты в списке.';
+      emailInput.value = '';
+    }).catch(err => {
+      msg.style.color = '#ff7a7a';
+      msg.textContent = 'Ошибка: ' + err.message;
+    });
+  });
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+  firebase.initializeApp({
+    apiKey: "AIzaSyDqF9C1GPmJLBIduZzN7uixLqvWgtqNy1Q",
+    authDomain: "looksmax-414ec.firebaseapp.com",
+    projectId: "looksmax-414ec",
+    storageBucket: "looksmax-414ec.firebasestorage.app",
+    messagingSenderId: "238016854078",
+    appId: "1:238016854078:web:a422bee28a806574edf96f",
+    measurementId: "G-0339HDRKFQ"
+  });
 </script>
 
 </body>
