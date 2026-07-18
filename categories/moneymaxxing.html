@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+   ym(110802287, "init", { ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110802287" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moneymaxxing — статус и Appeal — LOOKS-MAX</title>
+<meta name="description" content="Как статус и деньги двигают Appeal, и с чего начать moneymaxxing.">
+<link rel="canonical" href="https://looks-max.ru/categories/moneymaxxing.html">
+<meta property="og:title" content="Moneymaxxing — LOOKS-MAX">
+<meta property="og:type" content="website">
+<link rel="icon" href="../logo.svg?v=2" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="noise"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav>
+  <a href="../index.html" class="logo"><img src="../logo.svg?v=2" alt="Looks-Max" width="34" height="34"><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="../index.html#categories">Категории</a>
+    <a href="../dictionary.html">Словарь</a>
+    <a href="../celebrities.html">Рейтинг</a>
+    <a href="../forum.html">Форум</a>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button>
+</nav>
+
+<header class="hero cat-hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="eyebrow">Category</div>
+  <h1 class="title" style="font-size:clamp(48px,10vw,130px);"><span class="emoji-plain">💰</span> MONEYMAXXING</h1>
+  <p class="hero-sub">Успех и статус — то, что тоже двигает halo effect, наравне со стилем и харизмой.</p>
+</header>
+
+<section id="articles">
+  <div class="section-head reveal">
+    <div><span class="section-tag">В разделе</span><h2>Материалы</h2></div>
+  </div>
+  <div class="grid">
+
+    <a class="card reveal tilt" href="../articles/moneymaxxing-basics.html">
+      <div class="card-img art-frame"><span class="card-cat">Moneymaxxing</span><div class="art-glyph">$</div><div class="art-grid"></div></div>
+      <div class="card-body"><h3>Статус и деньги: как они влияют на Appeal</h3><p>Почему видимый статус двигает Appeal — и с чего начать без наивных обещаний.</p><div class="card-meta"><span>6 мин чтения</span><span class="read">Читать →</span></div></div>
+    </a>
+
+    <a class="card reveal tilt" href="../celebs/morgenshtern.html">
+      <div class="card-img art-frame"><span class="card-cat">Разбор</span><div class="art-glyph">M</div><div class="art-grid"></div></div>
+      <div class="card-body"><h3>Разбор: Моргенштерн</h3><p>Живой пример того, как статус и подача вытягивают Appeal выше PSL.</p><div class="card-meta"><span>Профиль</span><span class="read">Читать →</span></div></div>
+    </a>
+
+    <a class="card reveal tilt" href="../articles/wardrobe-phenotype.html">
+      <div class="card-img art-frame"><span class="card-cat">Стиль</span><div class="art-glyph">St</div><div class="art-grid"></div></div>
+      <div class="card-body"><h3>Гардероб под фенотип</h3><p>Инвестиции в базу гардероба дают больше отдачи, чем один дорогой предмет.</p><div class="card-meta"><span>6 мин чтения</span><span class="read">Читать →</span></div></div>
+    </a>
+
+  </div>
+  <a class="psl-hint" href="https://facerate.ru" target="_blank" style="margin-top:40px;">Проверь, как воспринимается твой Appeal — facerate.ru</a>
+</section>
+
+<footer>
+  <div class="logo"><img src="../logo.svg?v=2" alt="" width="26" height="26">LOOKS<span style="color:var(--gold)">-MAX</span></div>
+  <a href="../terms.html" style="color:var(--gold)">Соглашение</a>
+  <div>© 2026 looks-max.ru</div>
+</footer>
+
+<script>
+  const navBurger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  navBurger.addEventListener('click', () => { navBurger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navBurger.classList.remove('open'); navLinks.classList.remove('open'); }));
+
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+  document.querySelectorAll('a, .card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); observer.unobserve(entry.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('scrollProgress').style.width = pct + '%';
+  });
+
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(600px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+</script>
+</body>
+</html>

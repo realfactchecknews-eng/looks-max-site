@@ -392,6 +392,7 @@
     gap: 20px;
   }
   .cat-item {
+    display: block;
     padding: 40px 26px;
     border: 1px solid var(--line);
     border-radius: 18px;
@@ -559,3 +560,69 @@
 .related-links { display: flex; flex-direction: column; gap: 10px; }
 .related-links a { color: var(--gold-bright); font-size: 14px; }
 .related-links a:hover { color: var(--gold); }
+
+/* scroll progress bar */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+  z-index: 300; transition: width .1s linear;
+  box-shadow: 0 0 8px rgba(212,175,106,0.6);
+}
+
+/* floating orbs on category hero backgrounds */
+.cat-hero { position: relative; overflow: hidden; }
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(60px); opacity: 0.35; pointer-events: none;
+  z-index: 0;
+}
+.orb1 {
+  width: 340px; height: 340px; top: 10%; left: 8%;
+  background: radial-gradient(circle, var(--gold), transparent 70%);
+  animation: floatOrb1 14s ease-in-out infinite;
+}
+.orb2 {
+  width: 260px; height: 260px; bottom: 8%; right: 10%;
+  background: radial-gradient(circle, var(--gold-bright), transparent 70%);
+  animation: floatOrb2 18s ease-in-out infinite;
+}
+@keyframes floatOrb1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(60px, 40px) scale(1.15); }
+}
+@keyframes floatOrb2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, -30px) scale(1.1); }
+}
+
+/* 3D tilt cards */
+.tilt { transition: transform .25s ease-out, border-color .4s !important; }
+
+/* magnetic button glow */
+.btn-solid, .btn-outline {
+  position: relative;
+}
+.btn-solid::after {
+  content: ''; position: absolute; inset: -2px; border-radius: 999px;
+  background: linear-gradient(120deg, var(--gold-bright), var(--gold));
+  opacity: 0; filter: blur(10px); z-index: -1; transition: opacity .3s;
+}
+.btn-solid:hover::after { opacity: 0.6; }
+
+/* animated underline for section headers */
+.section-tag { position: relative; }
+
+/* pulsing dot accent for cat-item on hover */
+.cat-item { cursor: pointer; }
+.cat-item .cat-icon { transition: transform .4s cubic-bezier(.2,.8,.2,1); display: inline-block; }
+.cat-item:hover .cat-icon { transform: scale(1.25) rotate(-6deg); }
+
+.emoji-plain {
+  -webkit-text-fill-color: initial;
+  background: none; -webkit-background-clip: initial; background-clip: initial;
+  color: initial; display: inline-block;
+}
+
+/* fade-in page load */
+body { animation: pageFadeIn .6s ease; }
+@keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
