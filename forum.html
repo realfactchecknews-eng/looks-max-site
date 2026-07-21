@@ -24,7 +24,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Форум — LOOKS-MAX</title>
-<meta name="description" content="Форум looksmaxxing-сообщества LOOKS-MAX: обсуждения, разборы, вопросы.">
+<meta name="description" content="Форум looksmaxxing-сообщества LOOKS-MAX: обсуждения, разборы, вопросы, категории и хештеги.">
 <link rel="canonical" href="https://looks-max.ru/forum.html">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -32,7 +32,7 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="stylesheet" href="style.css">
 <style>
-  .forum-wrap { max-width: 720px; margin: 0 auto; padding: 160px 24px 120px; }
+  .forum-wrap { max-width: 760px; margin: 0 auto; padding: 160px 24px 120px; }
   .auth-box {
     display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
     padding: 20px; border: 1px solid var(--line); border-radius: 16px;
@@ -53,22 +53,98 @@
   .btn-sm.outline:hover { border-color: var(--gold); }
   .user-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
   .user-bar span { color: var(--text-dim); font-size: 14px; }
+
   .post-form { display: none; margin-bottom: 40px; }
   .post-form textarea {
     width: 100%; min-height: 90px; resize: vertical;
     background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px;
-    padding: 16px; color: #fff; font-family: 'Manrope', sans-serif; font-size: 14px; outline: none;
-    margin-bottom: 12px;
+    padding: 16px; color: #fff; font-family: 'Manrope', sans-serif; font-size: 15px; outline: none;
+    margin-bottom: 12px; line-height: 1.5;
   }
   .post-form textarea:focus { border-color: var(--gold); }
-  .post {
-    padding: 20px; border: 1px solid var(--line); border-radius: 14px;
-    background: var(--bg-soft); margin-bottom: 14px;
+  .form-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .form-row select, .form-row input[type="url"] {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 14px; color: #eee; font-size: 13px; font-family: 'Manrope', sans-serif;
+    outline: none; flex: 1; min-width: 160px;
   }
-  .post .meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--gold); margin-bottom: 8px; }
-  .post .body { font-size: 14px; color: #d8d8db; line-height: 1.6; white-space: pre-wrap; }
+  .form-row select:focus, .form-row input[type="url"]:focus { border-color: var(--gold); }
+  .emoji-bar { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 10px; }
+  .emoji-btn {
+    font-size: 19px; background: none; border: none; cursor: pointer;
+    padding: 5px 7px; border-radius: 8px; line-height: 1;
+  }
+  .emoji-btn:hover { background: var(--bg); }
+  .form-hint { font-size: 11px; color: var(--text-dim); margin-top: -6px; margin-bottom: 12px; }
+
+  .cat-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .cat-filter-btn {
+    padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line);
+    background: none; color: var(--text-dim); font-size: 12px; letter-spacing: 0.3px;
+    cursor: pointer; font-family: 'Manrope', sans-serif; transition: border-color .2s, color .2s, background .2s;
+  }
+  .cat-filter-btn:hover { color: #eee; }
+  .cat-filter-btn.active { border-color: var(--gold); color: var(--gold-bright); background: rgba(212,175,106,0.1); }
+
+  .active-tag-bar {
+    display: none; align-items: center; gap: 10px; margin-bottom: 20px;
+    font-size: 13px; color: var(--text-dim);
+  }
+  .active-tag-bar b { color: var(--gold-bright); }
+  .active-tag-bar button {
+    background: none; border: 1px solid var(--line); color: var(--text-dim);
+    border-radius: 999px; padding: 4px 12px; font-size: 12px; cursor: pointer;
+  }
+
+  .post {
+    padding: 22px; border: 1px solid var(--line); border-radius: 16px;
+    background: var(--bg-soft); margin-bottom: 16px;
+  }
+  .post-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .avatar-circle {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 19px; color: #100b02;
+  }
+  .post-head-info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .post-author { font-weight: 700; font-size: 14px; color: #fff; }
+  .post-time { font-size: 11.5px; color: var(--text-dim); }
+  .cat-badge {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+    padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line);
+    color: var(--gold); flex-shrink: 0; white-space: nowrap;
+  }
+  .post .body {
+    font-size: 15px; color: #d8d8db; line-height: 1.7; white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .post .body .tag { color: var(--gold-bright); cursor: pointer; font-weight: 600; }
+  .post .body .tag:hover { text-decoration: underline; }
+  .post-img {
+    width: 100%; max-height: 420px; object-fit: cover;
+    border-radius: 12px; margin-top: 14px; border: 1px solid var(--line);
+    display: block;
+  }
+  .post-footer { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
+  .like-btn {
+    display: flex; align-items: center; gap: 7px;
+    background: none; border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 16px; color: var(--text-dim); font-size: 13px; cursor: pointer;
+    font-family: 'Manrope', sans-serif; transition: border-color .2s, color .2s;
+  }
+  .like-btn:hover { border-color: var(--gold); color: #eee; }
+  .like-btn.liked { border-color: var(--gold); color: var(--gold-bright); background: rgba(212,175,106,0.08); }
+  .like-btn .heart { display: inline-block; transition: transform .15s; }
+  .like-btn:active .heart { transform: scale(1.3); }
+
   .status-msg { color: var(--text-dim); font-size: 13px; text-align: center; padding: 20px 0; }
   .error-msg { color: #ff7a7a; font-size: 13px; margin-top: 8px; }
+
+  @media (max-width: 600px) {
+    .post-head { flex-wrap: wrap; }
+    .cat-badge { order: 3; margin-left: 54px; margin-top: -8px; }
+  }
 </style>
 </head>
 <body>
@@ -108,9 +184,38 @@
 
   <!-- Форма поста -->
   <div class="post-form" id="postForm">
-    <textarea id="postText" placeholder="Что обсуждаем?"></textarea>
+    <div class="emoji-bar" id="emojiBar"></div>
+    <textarea id="postText" placeholder="Что обсуждаем? Можно добавить #хештеги прямо в текст"></textarea>
+    <div class="form-row">
+      <select id="postCategory">
+        <option value="Общее">💬 Общее</option>
+        <option value="Softmax">🌿 Softmax</option>
+        <option value="Hardmax">⚕️ Hardmax</option>
+        <option value="Прогресс">📈 Прогресс</option>
+        <option value="Вопрос">❓ Вопрос</option>
+        <option value="Мемы">😂 Мемы</option>
+      </select>
+      <input type="url" id="postImageUrl" placeholder="Ссылка на картинку (необязательно)">
+    </div>
+    <div class="form-hint">Ссылку на картинку можно взять из любого хостинга изображений (например imgur.com) — просто вставь прямую ссылку на файл.</div>
     <button class="btn-sm solid" id="submitPost">Опубликовать</button>
     <div class="error-msg" id="postError"></div>
+  </div>
+
+  <!-- Фильтры по категориям -->
+  <div class="cat-filters" id="catFilters">
+    <button class="cat-filter-btn active" data-cat="Все">Все</button>
+    <button class="cat-filter-btn" data-cat="Общее">💬 Общее</button>
+    <button class="cat-filter-btn" data-cat="Softmax">🌿 Softmax</button>
+    <button class="cat-filter-btn" data-cat="Hardmax">⚕️ Hardmax</button>
+    <button class="cat-filter-btn" data-cat="Прогресс">📈 Прогресс</button>
+    <button class="cat-filter-btn" data-cat="Вопрос">❓ Вопрос</button>
+    <button class="cat-filter-btn" data-cat="Мемы">😂 Мемы</button>
+  </div>
+
+  <div class="active-tag-bar" id="activeTagBar">
+    <span>Фильтр по хештегу: <b id="activeTagLabel"></b></span>
+    <button id="clearTagBtn">✕ Сбросить</button>
   </div>
 
   <!-- Лента постов -->
@@ -131,7 +236,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 
 <script>
-  // ЗАМЕНИ на свой конфиг из Firebase Console → Project settings → Your apps → Web app
   const firebaseConfig = {
     apiKey: "AIzaSyDqF9C1GPmJLBIduZzN7uixLqvWgtqNy1Q",
     authDomain: "looksmax-414ec.firebaseapp.com",
@@ -159,9 +263,131 @@
   const userEmail = document.getElementById('userEmail');
   const postForm = document.getElementById('postForm');
   const feed = document.getElementById('feed');
+  const catFilters = document.getElementById('catFilters');
+  const activeTagBar = document.getElementById('activeTagBar');
+  const activeTagLabel = document.getElementById('activeTagLabel');
+  const clearTagBtn = document.getElementById('clearTagBtn');
 
-  if (!firebaseReady || firebaseConfig.apiKey === "ВСТАВЬ_СЮДА") {
-    feed.innerHTML = '<div class="status-msg">Форум ещё не подключён к базе данных. Владелец сайта: вставь конфиг Firebase в &lt;script&gt; внизу forum.html.</div>';
+  const EMOJIS = ['🔥','💀','😂','😭','🗿','💪','🧬','⚡','👑','🎯','😏','🤨','💯','🥀','🫡','😤'];
+  const emojiBar = document.getElementById('emojiBar');
+  const postTextEl = document.getElementById('postText');
+  EMOJIS.forEach(em => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'emoji-btn'; b.textContent = em;
+    b.addEventListener('click', () => {
+      const start = postTextEl.selectionStart, end = postTextEl.selectionEnd;
+      const val = postTextEl.value;
+      postTextEl.value = val.slice(0, start) + em + val.slice(end);
+      postTextEl.focus();
+      postTextEl.selectionStart = postTextEl.selectionEnd = start + em.length;
+    });
+    emojiBar.appendChild(b);
+  });
+
+  let currentUser = null;
+  let allPosts = [];
+  let activeCat = 'Все';
+  let activeTag = null;
+
+  function extractTags(text) {
+    const matches = text.match(/#[a-zA-Zа-яёА-ЯЁ0-9_]+/g);
+    return matches ? [...new Set(matches.map(t => t.toLowerCase()))] : [];
+  }
+
+  function renderBodyHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    let html = div.innerHTML;
+    html = html.replace(/#([a-zA-Zа-яёА-ЯЁ0-9_]+)/g, '<span class="tag" data-tag="#$1">#$1</span>');
+    return html;
+  }
+
+  function timeAgo(date) {
+    const diffMs = Date.now() - date.getTime();
+    const min = Math.floor(diffMs / 60000);
+    if (min < 1) return 'только что';
+    if (min < 60) return min + ' мин назад';
+    const h = Math.floor(min / 60);
+    if (h < 24) return h + ' ч назад';
+    const d = Math.floor(h / 24);
+    if (d < 7) return d + ' дн назад';
+    return date.toLocaleDateString('ru-RU');
+  }
+
+  function renderFeed() {
+    let posts = allPosts;
+    if (activeCat !== 'Все') posts = posts.filter(p => (p.category || 'Общее') === activeCat);
+    if (activeTag) posts = posts.filter(p => (p.tags || []).includes(activeTag));
+
+    activeTagBar.style.display = activeTag ? 'flex' : 'none';
+    if (activeTag) activeTagLabel.textContent = activeTag;
+
+    if (posts.length === 0) {
+      feed.innerHTML = '<div class="status-msg">Ничего не найдено по этому фильтру.</div>';
+      return;
+    }
+    feed.innerHTML = '';
+    posts.forEach(post => {
+      const time = post.createdAt ? timeAgo(post.createdAt.toDate()) : '...';
+      const initial = (post.author || '?').charAt(0).toUpperCase();
+      const liked = currentUser && (post.likedBy || []).includes(currentUser.uid);
+      const likeCount = post.likes || 0;
+      const div = document.createElement('div');
+      div.className = 'post';
+      div.innerHTML = `
+        <div class="post-head">
+          <div class="avatar-circle">${initial}</div>
+          <div class="post-head-info">
+            <span class="post-author">${post.author || 'аноним'}</span>
+            <span class="post-time">${time}</span>
+          </div>
+          <span class="cat-badge">${post.category || 'Общее'}</span>
+        </div>
+        <div class="body">${renderBodyHtml(post.text || '')}</div>
+        ${post.imageUrl ? `<img class="post-img" src="${post.imageUrl}" alt="" loading="lazy" onerror="this.style.display='none'">` : ''}
+        <div class="post-footer">
+          <button class="like-btn ${liked ? 'liked' : ''}" data-id="${post.id}">
+            <span class="heart">${liked ? '❤️' : '🤍'}</span><span class="like-count">${likeCount}</span>
+          </button>
+        </div>
+      `;
+      div.querySelectorAll('.tag').forEach(el => {
+        el.addEventListener('click', () => { activeTag = el.dataset.tag; renderFeed(); window.scrollTo({top: 0, behavior:'smooth'}); });
+      });
+      div.querySelector('.like-btn').addEventListener('click', () => toggleLike(post));
+      feed.appendChild(div);
+    });
+  }
+
+  function toggleLike(post) {
+    if (!currentUser) { alert('Войди, чтобы ставить лайки'); return; }
+    const ref = db.collection('posts').doc(post.id);
+    const alreadyLiked = (post.likedBy || []).includes(currentUser.uid);
+    if (alreadyLiked) {
+      ref.update({
+        likes: firebase.firestore.FieldValue.increment(-1),
+        likedBy: firebase.firestore.FieldValue.arrayRemove(currentUser.uid)
+      });
+    } else {
+      ref.update({
+        likes: firebase.firestore.FieldValue.increment(1),
+        likedBy: firebase.firestore.FieldValue.arrayUnion(currentUser.uid)
+      });
+    }
+  }
+
+  catFilters.querySelectorAll('.cat-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeCat = btn.dataset.cat;
+      catFilters.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderFeed();
+    });
+  });
+  clearTagBtn.addEventListener('click', () => { activeTag = null; renderFeed(); });
+
+  if (!firebaseReady) {
+    feed.innerHTML = '<div class="status-msg">Форум ещё не подключён к базе данных.</div>';
   } else {
     document.getElementById('registerBtn').addEventListener('click', () => {
       const email = document.getElementById('emailInput').value.trim();
@@ -189,6 +415,7 @@
     });
 
     auth.onAuthStateChanged(user => {
+      currentUser = user;
       if (user) {
         authBox.style.display = 'none';
         userBar.style.display = 'flex';
@@ -199,10 +426,13 @@
         userBar.style.display = 'none';
         postForm.style.display = 'none';
       }
+      renderFeed();
     });
 
     document.getElementById('submitPost').addEventListener('click', () => {
-      const text = document.getElementById('postText').value.trim();
+      const text = postTextEl.value.trim();
+      const category = document.getElementById('postCategory').value;
+      const imageUrl = document.getElementById('postImageUrl').value.trim();
       const postError = document.getElementById('postError');
       postError.textContent = '';
       if (!text) return;
@@ -211,28 +441,23 @@
       db.collection('posts').add({
         text: text,
         author: user.email,
+        authorUid: user.uid,
+        category: category,
+        imageUrl: imageUrl || null,
+        tags: extractTags(text),
+        likes: 0,
+        likedBy: [],
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       }).then(() => {
-        document.getElementById('postText').value = '';
+        postTextEl.value = '';
+        document.getElementById('postImageUrl').value = '';
       }).catch(err => postError.textContent = err.message);
     });
 
-    db.collection('posts').orderBy('createdAt', 'desc').limit(50)
+    db.collection('posts').orderBy('createdAt', 'desc').limit(100)
       .onSnapshot(snapshot => {
-        if (snapshot.empty) {
-          feed.innerHTML = '<div class="status-msg">Пока пусто — стань первым, кто напишет.</div>';
-          return;
-        }
-        feed.innerHTML = '';
-        snapshot.forEach(doc => {
-          const post = doc.data();
-          const time = post.createdAt ? post.createdAt.toDate().toLocaleString('ru-RU') : '...';
-          const div = document.createElement('div');
-          div.className = 'post';
-          div.innerHTML = `<div class="meta"><span>${post.author || 'аноним'}</span><span>${time}</span></div><div class="body"></div>`;
-          div.querySelector('.body').textContent = post.text;
-          feed.appendChild(div);
-        });
+        allPosts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderFeed();
       }, err => {
         feed.innerHTML = '<div class="status-msg">Ошибка загрузки: ' + err.message + '</div>';
       });
