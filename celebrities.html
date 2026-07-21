@@ -87,6 +87,8 @@
   tbody tr:hover { background: var(--bg-soft); }
   .name { font-weight: 700; }
   .role { display: block; font-size: 12px; color: var(--text-dim); font-weight: 300; margin-top: 2px; }
+  .person { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); flex-shrink: 0; }
   .score { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--gold-bright); }
   .gap { font-size: 13px; }
   .gap.pos { color: #6ee7a0; }
@@ -141,49 +143,51 @@
     </thead>
     <tbody>
       <tr>
-        <td data-label="Персона"><span class="name">Brad Pitt</span><span class="role">актёр</span></td>
+        <td data-label="Персона"><div class="person"><img class="avatar" src="images/celebs/brad-pitt.jpg" alt="Brad Pitt" loading="lazy"><div><span class="name">Brad Pitt</span><span class="role">актёр</span></div></div></td>
         <td data-label="PSL"><span class="score">8.2</span></td>
         <td data-label="Appeal"><span class="score">9.0</span></td>
         <td data-label="Разница"><span class="gap pos">+0.8 — харизма и статус тянут Appeal выше PSL</span></td>
       </tr>
       <tr>
-        <td data-label="Персона"><span class="name">Timothée Chalamet</span><span class="role">актёр</span></td>
+        <td data-label="Персона"><div class="person"><img class="avatar" src="images/celebs/timothee-chalamet.jpg" alt="Timothée Chalamet" loading="lazy"><div><span class="name">Timothée Chalamet</span><span class="role">актёр</span></div></div></td>
         <td data-label="PSL"><span class="score">8.0</span></td>
         <td data-label="Appeal"><span class="score">8.3</span></td>
         <td data-label="Разница"><span class="gap pos">+0.3 — стиль и подача слегка усиливают базу</span></td>
       </tr>
       <tr>
-        <td data-label="Персона"><span class="name">Henry Cavill</span><span class="role">актёр</span></td>
+        <td data-label="Персона"><div class="person"><img class="avatar" src="images/celebs/henry-cavill.jpg" alt="Henry Cavill" loading="lazy"><div><span class="name">Henry Cavill</span><span class="role">актёр</span></div></div></td>
         <td data-label="PSL"><span class="score">8.6</span></td>
         <td data-label="Appeal"><span class="score">8.6</span></td>
         <td data-label="Разница"><span class="gap zero">0 — редкий случай, когда шкалы совпадают</span></td>
       </tr>
       <tr>
-        <td data-label="Персона"><span class="name">Zendaya</span><span class="role">актриса</span></td>
+        <td data-label="Персона"><div class="person"><img class="avatar" src="images/celebs/zendaya.jpg" alt="Zendaya" loading="lazy"><div><span class="name">Zendaya</span><span class="role">актриса</span></div></div></td>
         <td data-label="PSL"><span class="score">8.4</span></td>
         <td data-label="Appeal"><span class="score">9.1</span></td>
         <td data-label="Разница"><span class="gap pos">+0.7 — стиль и медиа-присутствие двигают Appeal сильно вверх</span></td>
       </tr>
       <tr>
-        <td data-label="Персона"><span class="name">Margot Robbie</span><span class="role">актриса</span></td>
+        <td data-label="Персона"><div class="person"><img class="avatar" src="images/celebs/margot-robbie.jpg" alt="Margot Robbie" loading="lazy"><div><span class="name">Margot Robbie</span><span class="role">актриса</span></div></div></td>
         <td data-label="PSL"><span class="score">8.5</span></td>
         <td data-label="Appeal"><span class="score">8.9</span></td>
         <td data-label="Разница"><span class="gap pos">+0.4 — харизма чуть выше и без того сильного PSL</span></td>
       </tr>
       <tr>
-        <td data-label="Персона"><span class="name">Michael B. Jordan</span><span class="role">актёр</span></td>
+        <td data-label="Персона"><div class="person"><img class="avatar" src="images/celebs/michael-b-jordan.jpg" alt="Michael B. Jordan" loading="lazy"><div><span class="name">Michael B. Jordan</span><span class="role">актёр</span></div></div></td>
         <td data-label="PSL"><span class="score">8.3</span></td>
         <td data-label="Appeal"><span class="score">8.7</span></td>
         <td data-label="Разница"><span class="gap pos">+0.4 — фрейм и уверенность добавляют баллы сверху</span></td>
       </tr>
       <tr>
-        <td data-label="Персона"><a href="celebs/morgenshtern.html" class="name" style="color:var(--gold-bright); text-decoration:underline;">Моргенштерн →</a><span class="role">блогер / артист</span></td>
+        <td data-label="Персона"><a class="person" href="celebs/morgenshtern.html" style="color:inherit;"><img class="avatar" src="images/celebs/morgenshtern.jpg" alt="Моргенштерн" loading="lazy"><div><span class="name" style="color:var(--gold-bright); text-decoration:underline;">Моргенштерн →</span><span class="role">блогер / артист</span></div></a></td>
         <td data-label="PSL"><span class="score">6.8</span></td>
         <td data-label="Appeal"><span class="score">8.2</span></td>
         <td data-label="Разница"><span class="gap pos">+1.4 — самый большой разрыв в подборке, читай подробный разбор</span></td>
       </tr>
     </tbody>
   </table>
+
+  <div class="legend" style="margin-top:10px; font-size:11px;">Фото: Wikimedia Commons, лицензии CC BY-SA.</div>
 
   <div class="legend">
     <b>Как читать таблицу:</b> PSL — это только лицо (симметрия, кости, гармония черт), Appeal — общее впечатление с учётом тела, стиля, харизмы и медийной подачи. Положительная разница означает, что харизма/стиль тянут восприятие вверх сильнее, чем «сырая» геометрия лица. Нулевая или отрицательная разница — редкость, обычно у людей с уже топовым PSL расти особо некуда.
