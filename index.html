@@ -55,9 +55,11 @@
   <button class="nav-burger" id="navBurger" aria-label="Меню"><span></span><span></span><span></span></button>
 </nav>
 
-<header class="hero">
-  <div class="eyebrow">Ascend &amp; Forget</div>
-  <h1 class="title">LOOKS&#8209;MAX</h1>
+<header class="hero" id="heroSection">
+  <div class="orb orb1" id="parallaxOrb1"></div>
+  <div class="orb orb2" id="parallaxOrb2"></div>
+  <div class="eyebrow" id="parallaxEyebrow">Ascend &amp; Forget</div>
+  <h1 class="title" id="parallaxTitle">LOOKS&#8209;MAX</h1>
   <p class="hero-sub">Наука за фреймом и canthal tilt, честные гайды по looksmaxxing и разбор трендов сообщества — без воды и без маркетингового вранья.</p>
   <div class="hero-cta">
     <a href="#articles" class="btn btn-solid">Читать гайды</a>
@@ -385,6 +387,23 @@
     appId: "1:238016854078:web:a422bee28a806574edf96f",
     measurementId: "G-0339HDRKFQ"
   });
+
+  // Параллакс на hero главной страницы
+  const heroSection = document.getElementById('heroSection');
+  const parallaxOrb1 = document.getElementById('parallaxOrb1');
+  const parallaxOrb2 = document.getElementById('parallaxOrb2');
+  const parallaxTitle = document.getElementById('parallaxTitle');
+  const parallaxEyebrow = document.getElementById('parallaxEyebrow');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight * 1.2) {
+      if (parallaxOrb1) parallaxOrb1.style.transform = `translateY(${y * 0.35}px)`;
+      if (parallaxOrb2) parallaxOrb2.style.transform = `translateY(${y * 0.2}px)`;
+      if (parallaxTitle) parallaxTitle.style.transform = `translateY(${y * 0.15}px)`;
+      if (parallaxEyebrow) parallaxEyebrow.style.transform = `translateY(${y * 0.1}px)`;
+      if (heroSection) heroSection.style.opacity = Math.max(0, 1 - y / 700);
+    }
+  }, { passive: true });
 </script>
 
 </body>

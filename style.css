@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap');
 
+  /* Плавный переход между страницами сайта (View Transitions API) */
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) {
+    animation-duration: 0.35s;
+    animation-timing-function: ease;
+  }
+
   :root {
     --gold: #d4af6a;
     --gold-bright: #f2d5a0;
@@ -248,7 +255,12 @@
     position: relative;
     transition: transform .5s cubic-bezier(.2,.8,.2,1), border-color .4s;
   }
-  .card:hover { transform: translateY(-10px); border-color: var(--gold); }
+  .card { transition: transform .35s, border-color .35s, box-shadow .35s; }
+  .card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px rgba(212,175,106,0.25), 0 20px 60px -15px rgba(212,175,106,0.35), 0 0 40px -10px rgba(212,175,106,0.25);
+  }
   .card-img {
     height: 220px;
     position: relative;
@@ -408,7 +420,11 @@
     opacity: 0; transition: opacity .4s;
   }
   .cat-item:hover::before { opacity: 1; }
-  .cat-item:hover { border-color: var(--gold); transform: translateY(-6px); }
+  .cat-item { transition: transform .35s, border-color .35s, box-shadow .35s; }
+  .cat-item:hover {
+    border-color: var(--gold); transform: translateY(-6px);
+    box-shadow: 0 20px 50px -15px rgba(212,175,106,0.3), 0 0 35px -8px rgba(212,175,106,0.25);
+  }
   .cat-icon { font-size: 34px; margin-bottom: 16px; }
   .cat-item h4 { font-size: 16px; margin-bottom: 8px; }
   .cat-item p { font-size: 13px; color: var(--text-dim); font-weight: 300; }

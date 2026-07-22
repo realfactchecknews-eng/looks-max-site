@@ -132,7 +132,25 @@
     padding: 26px;
     transition: border-color .3s, transform .3s;
   }
-  .term:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .term:hover {
+    border-color: var(--gold); transform: translateY(-4px);
+    box-shadow: 0 20px 45px -15px rgba(212,175,106,0.3), 0 0 30px -8px rgba(212,175,106,0.25);
+  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  #cursor {
+    position: fixed; width: 22px; height: 22px; border: 1px solid var(--gold);
+    border-radius: 50%; pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%); transition: width .2s, height .2s, opacity .2s;
+    mix-blend-mode: difference;
+  }
+  #cursor.hover { width: 44px; height: 44px; background: rgba(212,175,106,0.15); }
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+    z-index: 300; transition: width .1s linear;
+  }
+  @media (pointer: coarse) { #cursor { display: none; } }
   .term-head {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 10px;
@@ -181,6 +199,9 @@
 </head>
 <body>
 
+<div id="cursor"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <nav>
   <a href="index.html" class="logo"><img src="logo.svg?v=2" width="30" height="30" alt=""><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
   <div style="display:flex; gap:24px; align-items:center;">
@@ -209,52 +230,52 @@
 
 <div class="terms" id="terms">
 
-  <div class="term" data-cat="tier"><div class="term-head"><h3>Sub5</h3><span class="cat">тир</span></div><p>Нижний тир шкалы: заметные диспропорции черт. Условность сообщества, не диагноз и не медицинский факт.<span class="scale">&lt; 5 / 10 по PSL</span></p></div>
-  <div class="term" data-cat="tier"><div class="term-head"><h3>LTN</h3><span class="cat">тир</span></div><p>Low-Tier Normie. Чуть ниже среднего или ровно среднее лицо, теряется в толпе, без выраженных плюсов и минусов.<span class="scale">≈ 5 / 10 по PSL, около 25% людей</span></p></div>
-  <div class="term" data-cat="tier"><div class="term-head"><h3>MTN</h3><span class="cat">тир</span></div><p>Mid-Tier Normie. Ровно средний или чуть выше среднего уровень — ничего яркого ни в плюс, ни в минус.<span class="scale">≈ 5.5 / 10 по PSL, около 30% людей</span></p></div>
-  <div class="term" data-cat="tier"><div class="term-head"><h3>HTN</h3><span class="cat">тир</span></div><p>High-Tier Normie. Выше среднего, заметный фрейм или гармония черт, обращает на себя внимание.<span class="scale">≈ 6–6.5 / 10 по PSL, около 15% людей</span></p></div>
-  <div class="term" data-cat="tier"><div class="term-head"><h3>Chadlite</h3><span class="cat">тир</span></div><p>Явно привлекательная внешность, сильный фрейм или черты лица — но не абсолютный пик иерархии.<span class="scale">≈ 7 / 10 по PSL, топ 5%</span></p></div>
-  <div class="term" data-cat="tier"><div class="term-head"><h3>Chad</h3><span class="cat">тир</span></div><p>Пик мужской эстетической иерархии в терминологии сообщества: гармония, уверенность, социальное доминирование.<span class="scale">8+ / 10 по PSL, около 1%</span> <a href="articles/chad-kto-eto.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
-  <div class="term" data-cat="tier"><div class="term-head"><h3>True Adam / True Eve</h3><span class="cat">тир</span></div><p>Шуточный «единственный в мире» идеал 10/10 — статистическая гипербола, а не реальная категория.</p></div>
-  <div class="term" data-cat="tier"><div class="term-head"><h3>Stacy / Stacylite</h3><span class="cat">тир</span></div><p>Женские аналоги Chad / Chadlite в той же шкале.</p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>Sub5</h3><span class="cat">тир</span></div><p>Нижний тир шкалы: заметные диспропорции черт. Условность сообщества, не диагноз и не медицинский факт.<span class="scale">&lt; 5 / 10 по PSL</span></p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>LTN</h3><span class="cat">тир</span></div><p>Low-Tier Normie. Чуть ниже среднего или ровно среднее лицо, теряется в толпе, без выраженных плюсов и минусов.<span class="scale">≈ 5 / 10 по PSL, около 25% людей</span></p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>MTN</h3><span class="cat">тир</span></div><p>Mid-Tier Normie. Ровно средний или чуть выше среднего уровень — ничего яркого ни в плюс, ни в минус.<span class="scale">≈ 5.5 / 10 по PSL, около 30% людей</span></p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>HTN</h3><span class="cat">тир</span></div><p>High-Tier Normie. Выше среднего, заметный фрейм или гармония черт, обращает на себя внимание.<span class="scale">≈ 6–6.5 / 10 по PSL, около 15% людей</span></p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>Chadlite</h3><span class="cat">тир</span></div><p>Явно привлекательная внешность, сильный фрейм или черты лица — но не абсолютный пик иерархии.<span class="scale">≈ 7 / 10 по PSL, топ 5%</span></p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>Chad</h3><span class="cat">тир</span></div><p>Пик мужской эстетической иерархии в терминологии сообщества: гармония, уверенность, социальное доминирование.<span class="scale">8+ / 10 по PSL, около 1%</span> <a href="articles/chad-kto-eto.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>True Adam / True Eve</h3><span class="cat">тир</span></div><p>Шуточный «единственный в мире» идеал 10/10 — статистическая гипербола, а не реальная категория.</p></div>
+  <div class="term reveal" data-cat="tier"><div class="term-head"><h3>Stacy / Stacylite</h3><span class="cat">тир</span></div><p>Женские аналоги Chad / Chadlite в той же шкале.</p></div>
 
-  <div class="term" data-cat="face"><div class="term-head"><h3>Canthal Tilt</h3><span class="cat">лицо</span></div><p>Угол наклона внешнего уголка глаза относительно внутреннего. Положительный (приподнятый) тилт считается более привлекательным.</p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Hunter Eyes</h3><span class="cat">лицо</span></div><p>Глубоко посаженные, узкие глаза с положительным canthal tilt — «хищный» и мужественный взгляд. <a href="articles/hunter-eyes-chto-eto.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Gonial Angle</h3><span class="cat">лицо</span></div><p>Угол нижней челюсти. Чем он острее (ближе к 90°), тем более выраженным и мужественным выглядит jawline.</p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Zygos</h3><span class="cat">лицо</span></div><p>Скуловые кости. Высокие, выступающие скулы добавляют лицу структуру и выразительную светотень.</p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Maxilla</h3><span class="cat">лицо</span></div><p>Верхняя челюсть. Хорошо развитая вперёд максилла даёт проекцию лица — ключевой фактор гармонии.</p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Facial Thirds</h3><span class="cat">лицо</span></div><p>Условное деление лица на три равные зоны: лоб-брови, брови-нос, нос-подбородок. Идеал — равные трети.</p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Mewing</h3><span class="cat">лицо</span></div><p>Техника позиционирования языка к нёбу — предположительно влияет на форму челюсти со временем. Предмет споров об эффективности.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Canthal Tilt</h3><span class="cat">лицо</span></div><p>Угол наклона внешнего уголка глаза относительно внутреннего. Положительный (приподнятый) тилт считается более привлекательным.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Hunter Eyes</h3><span class="cat">лицо</span></div><p>Глубоко посаженные, узкие глаза с положительным canthal tilt — «хищный» и мужественный взгляд. <a href="articles/hunter-eyes-chto-eto.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Gonial Angle</h3><span class="cat">лицо</span></div><p>Угол нижней челюсти. Чем он острее (ближе к 90°), тем более выраженным и мужественным выглядит jawline.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Zygos</h3><span class="cat">лицо</span></div><p>Скуловые кости. Высокие, выступающие скулы добавляют лицу структуру и выразительную светотень.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Maxilla</h3><span class="cat">лицо</span></div><p>Верхняя челюсть. Хорошо развитая вперёд максилла даёт проекцию лица — ключевой фактор гармонии.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Facial Thirds</h3><span class="cat">лицо</span></div><p>Условное деление лица на три равные зоны: лоб-брови, брови-нос, нос-подбородок. Идеал — равные трети.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Mewing</h3><span class="cat">лицо</span></div><p>Техника позиционирования языка к нёбу — предположительно влияет на форму челюсти со временем. Предмет споров об эффективности.</p></div>
 
-  <div class="term" data-cat="body"><div class="term-head"><h3>Frame</h3><span class="cat">тело</span></div><p>Ширина плеч и общая скелетная структура. Широкий фрейм — один из самых желанных мужских признаков.</p></div>
-  <div class="term" data-cat="body"><div class="term-head"><h3>Gymcel</h3><span class="cat">тело</span></div><p>Тот, кто серьёзно качается и имеет впечатляющую форму, но всё ещё испытывает трудности из-за лица или софт-скиллов.</p></div>
-  <div class="term" data-cat="body"><div class="term-head"><h3>Bonesmashing</h3><span class="cat">тело</span></div><p>Опасный и не подтверждённый наукой «метод» ударов по костям лица якобы для их укрепления. Не рекомендуется, это не техника, а миф.</p></div>
+  <div class="term reveal" data-cat="body"><div class="term-head"><h3>Frame</h3><span class="cat">тело</span></div><p>Ширина плеч и общая скелетная структура. Широкий фрейм — один из самых желанных мужских признаков.</p></div>
+  <div class="term reveal" data-cat="body"><div class="term-head"><h3>Gymcel</h3><span class="cat">тело</span></div><p>Тот, кто серьёзно качается и имеет впечатляющую форму, но всё ещё испытывает трудности из-за лица или софт-скиллов.</p></div>
+  <div class="term reveal" data-cat="body"><div class="term-head"><h3>Bonesmashing</h3><span class="cat">тело</span></div><p>Опасный и не подтверждённый наукой «метод» ударов по костям лица якобы для их укрепления. Не рекомендуется, это не техника, а миф.</p></div>
 
-  <div class="term" data-cat="mindset"><div class="term-head"><h3>Blackpill</h3><span class="cat">мышление</span></div><p>Убеждение, что генетика — главный определяющий фактор успеха в отношениях, сильнее усилий и личности. <a href="articles/blackpill-chto-eto.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
-  <div class="term" data-cat="mindset"><div class="term-head"><h3>Halo Effect</h3><span class="cat">мышление</span></div><p>Психологический эффект: привлекательным людям автоматически приписывают другие положительные качества.</p></div>
-  <div class="term" data-cat="mindset"><div class="term-head"><h3>Harmony</h3><span class="cat">мышление</span></div><p>То, насколько хорошо сочетаются отдельные черты лица между собой — важнее, чем каждая черта по отдельности.</p></div>
-  <div class="term" data-cat="mindset"><div class="term-head"><h3>Dimorphism</h3><span class="cat">мышление</span></div><p>Половой диморфизм — выраженность отличий мужских/женских черт лица. Более выраженный диморфизм часто воспринимается как более привлекательный.</p></div>
+  <div class="term reveal" data-cat="mindset"><div class="term-head"><h3>Blackpill</h3><span class="cat">мышление</span></div><p>Убеждение, что генетика — главный определяющий фактор успеха в отношениях, сильнее усилий и личности. <a href="articles/blackpill-chto-eto.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
+  <div class="term reveal" data-cat="mindset"><div class="term-head"><h3>Halo Effect</h3><span class="cat">мышление</span></div><p>Психологический эффект: привлекательным людям автоматически приписывают другие положительные качества.</p></div>
+  <div class="term reveal" data-cat="mindset"><div class="term-head"><h3>Harmony</h3><span class="cat">мышление</span></div><p>То, насколько хорошо сочетаются отдельные черты лица между собой — важнее, чем каждая черта по отдельности.</p></div>
+  <div class="term reveal" data-cat="mindset"><div class="term-head"><h3>Dimorphism</h3><span class="cat">мышление</span></div><p>Половой диморфизм — выраженность отличий мужских/женских черт лица. Более выраженный диморфизм часто воспринимается как более привлекательный.</p></div>
 
-  <div class="term" data-cat="slang"><div class="term-head"><h3>PSL</h3><span class="cat">сленг</span></div><p>Шкала 1–10 для оценки чисто лицевой эстетики: симметрия, костная структура, гармония черт. Не учитывает тело, стиль или харизму — только лицо.</p></div>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>Appeal</h3><span class="cat">сленг</span></div><p>Более широкая шкала 1–10: общая «привлекательность» человека целиком — лицо + тело + стиль + харизма + подача. Appeal и PSL путают именно потому, что оба измеряются в баллах 1–10, но PSL — это только геометрия лица, а Appeal — то, как человека воспринимают в реальной жизни. Можно иметь среднее лицо (PSL 6), но высокий Appeal (8) за счёт стиля, формы и уверенности — и наоборот.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>PSL</h3><span class="cat">сленг</span></div><p>Шкала 1–10 для оценки чисто лицевой эстетики: симметрия, костная структура, гармония черт. Не учитывает тело, стиль или харизму — только лицо.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Appeal</h3><span class="cat">сленг</span></div><p>Более широкая шкала 1–10: общая «привлекательность» человека целиком — лицо + тело + стиль + харизма + подача. Appeal и PSL путают именно потому, что оба измеряются в баллах 1–10, но PSL — это только геометрия лица, а Appeal — то, как человека воспринимают в реальной жизни. Можно иметь среднее лицо (PSL 6), но высокий Appeal (8) за счёт стиля, формы и уверенности — и наоборот.</p></div>
   <a class="psl-hint" href="https://facerate.ru" target="_blank">Точный PSL и Appeal по фото можно получить на facerate.ru</a>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>Mog / Mogging</h3><span class="cat">сленг</span></div><p>Заметно превосходить кого-то внешностью, статусом или presence. «Он могнул всех в комнате». <a href="articles/mog-chto-znachit.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>Ascend</h3><span class="cat">сленг</span></div><p>Заметно вырасти во внешности или статусе — перейти на тир выше в иерархии.</p></div>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>Rizz</h3><span class="cat">сленг</span></div><p>Харизма и умение привлекать людей за счёт личности и подачи, а не только внешности.</p></div>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>Jestermaxxing</h3><span class="cat">сленг</span></div><p>Компенсировать недостаток внешности чрезмерным юмором и клоунадой ради внимания.</p></div>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>Rankshift</h3><span class="cat">сленг</span></div><p>Заметное изменение позиции во внешностной иерархии — в плюс или в минус.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Mog / Mogging</h3><span class="cat">сленг</span></div><p>Заметно превосходить кого-то внешностью, статусом или presence. «Он могнул всех в комнате». <a href="articles/mog-chto-znachit.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Ascend</h3><span class="cat">сленг</span></div><p>Заметно вырасти во внешности или статусе — перейти на тир выше в иерархии.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Rizz</h3><span class="cat">сленг</span></div><p>Харизма и умение привлекать людей за счёт личности и подачи, а не только внешности.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Jestermaxxing</h3><span class="cat">сленг</span></div><p>Компенсировать недостаток внешности чрезмерным юмором и клоунадой ради внимания.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Rankshift</h3><span class="cat">сленг</span></div><p>Заметное изменение позиции во внешностной иерархии — в плюс или в минус.</p></div>
 
-  <div class="term" data-cat="method"><div class="term-head"><h3>Softmaxxing</h3><span class="cat">метод</span></div><p>Безопасные, немедицинские методы улучшения внешности: skincare, стиль, осанка, фитнес, стрижка. Базовый уровень для входа в тему. <a href="articles/softmax-hardmax-raznica.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
-  <div class="term" data-cat="method"><div class="term-head"><h3>Hardmaxxing</h3><span class="cat">метод</span></div><p>Радикальные методы, включая хирургию (ортогнатическая хирургия, ринопластика, кантопластика). Серьёзные медицинские вмешательства с реальными рисками. <a href="articles/softmax-hardmax-raznica.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
-  <div class="term" data-cat="method"><div class="term-head"><h3>Skinmaxxing</h3><span class="cat">метод</span></div><p>Улучшение внешности через уход за кожей: routine, защита от солнца, лечение акне и постакне.</p></div>
-  <div class="term" data-cat="method"><div class="term-head"><h3>Fashionmaxxing</h3><span class="cat">метод</span></div><p>Улучшение восприятия через одежду и стиль — крой, цвет, посадка под фенотип и тип фигуры.</p></div>
-  <div class="term" data-cat="method"><div class="term-head"><h3>Widemaxxing</h3><span class="cat">метод</span></div><p>Тренировки, направленные на визуальное увеличение ширины плеч и фрейма — дельты, широчайшие, трапеция.</p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Golden Ratio</h3><span class="cat">лицо</span></div><p>Соотношение пропорций лица примерно 1:1.618, которое иногда используют как ориентир гармонии — спорная и упрощённая модель, не универсальный стандарт красоты.</p></div>
-  <div class="term" data-cat="face"><div class="term-head"><h3>Norwood Scale (NW)</h3><span class="cat">лицо</span></div><p>Шкала стадий облысения по мужскому типу от NW1 (нет залысин) до NW7 (сильное облысение). Используется, чтобы обсуждать риск и стадию потери волос.</p></div>
-  <div class="term" data-cat="body"><div class="term-head"><h3>Adonis Belt</h3><span class="cat">тело</span></div><p>V-образные мышечные линии от косых мышц живота к паху — считаются маркером низкого процента жира и хорошей физической формы.</p></div>
-  <div class="term" data-cat="mindset"><div class="term-head"><h3>Looksmatch</h3><span class="cat">мышление</span></div><p>Теория, что пары в отношениях чаще всего близки по уровню PSL друг к другу — предмет споров в сообществе, не строгий закон.</p></div>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>NGL</h3><span class="cat">сленг</span></div><p>«Not gonna lie» — фраза-вставка перед честным (часто резким) мнением о чьей-то внешности в комментариях сообщества.</p></div>
-  <div class="term" data-cat="slang"><div class="term-head"><h3>Cope / Copemaxxing</h3><span class="cat">сленг</span></div><p>Психологически утешать себя вместо реальных действий по улучшению внешности — используется как критика избегания асценда.</p></div>
+  <div class="term reveal" data-cat="method"><div class="term-head"><h3>Softmaxxing</h3><span class="cat">метод</span></div><p>Безопасные, немедицинские методы улучшения внешности: skincare, стиль, осанка, фитнес, стрижка. Базовый уровень для входа в тему. <a href="articles/softmax-hardmax-raznica.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
+  <div class="term reveal" data-cat="method"><div class="term-head"><h3>Hardmaxxing</h3><span class="cat">метод</span></div><p>Радикальные методы, включая хирургию (ортогнатическая хирургия, ринопластика, кантопластика). Серьёзные медицинские вмешательства с реальными рисками. <a href="articles/softmax-hardmax-raznica.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>
+  <div class="term reveal" data-cat="method"><div class="term-head"><h3>Skinmaxxing</h3><span class="cat">метод</span></div><p>Улучшение внешности через уход за кожей: routine, защита от солнца, лечение акне и постакне.</p></div>
+  <div class="term reveal" data-cat="method"><div class="term-head"><h3>Fashionmaxxing</h3><span class="cat">метод</span></div><p>Улучшение восприятия через одежду и стиль — крой, цвет, посадка под фенотип и тип фигуры.</p></div>
+  <div class="term reveal" data-cat="method"><div class="term-head"><h3>Widemaxxing</h3><span class="cat">метод</span></div><p>Тренировки, направленные на визуальное увеличение ширины плеч и фрейма — дельты, широчайшие, трапеция.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Golden Ratio</h3><span class="cat">лицо</span></div><p>Соотношение пропорций лица примерно 1:1.618, которое иногда используют как ориентир гармонии — спорная и упрощённая модель, не универсальный стандарт красоты.</p></div>
+  <div class="term reveal" data-cat="face"><div class="term-head"><h3>Norwood Scale (NW)</h3><span class="cat">лицо</span></div><p>Шкала стадий облысения по мужскому типу от NW1 (нет залысин) до NW7 (сильное облысение). Используется, чтобы обсуждать риск и стадию потери волос.</p></div>
+  <div class="term reveal" data-cat="body"><div class="term-head"><h3>Adonis Belt</h3><span class="cat">тело</span></div><p>V-образные мышечные линии от косых мышц живота к паху — считаются маркером низкого процента жира и хорошей физической формы.</p></div>
+  <div class="term reveal" data-cat="mindset"><div class="term-head"><h3>Looksmatch</h3><span class="cat">мышление</span></div><p>Теория, что пары в отношениях чаще всего близки по уровню PSL друг к другу — предмет споров в сообществе, не строгий закон.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>NGL</h3><span class="cat">сленг</span></div><p>«Not gonna lie» — фраза-вставка перед честным (часто резким) мнением о чьей-то внешности в комментариях сообщества.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Cope / Copemaxxing</h3><span class="cat">сленг</span></div><p>Психологически утешать себя вместо реальных действий по улучшению внешности — используется как критика избегания асценда.</p></div>
 
 </div>
 
@@ -284,6 +305,24 @@
       filter();
     });
   });
+
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+  document.querySelectorAll('a, .term, .tag').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('scrollProgress').style.width = pct + '%';
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); revealObserver.unobserve(entry.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 
 </body>

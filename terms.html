@@ -57,6 +57,9 @@
 </head>
 <body>
 
+<div id="cursor"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <nav>
   <a href="index.html" class="logo"><img src="logo.svg?v=2" alt="Looks-Max" width="34" height="34"><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
   <div class="nav-links">
@@ -66,7 +69,7 @@
   </div>
 </nav>
 
-<div class="legal-wrap">
+<div class="legal-wrap reveal in">
   <h1>Пользовательское соглашение</h1>
   <span class="updated">Редакция от 17 июля 2026 года. Действует в отношении сайта looks-max.ru.</span>
 
@@ -118,5 +121,18 @@
   <div>© 2026 looks-max.ru</div>
 </footer>
 
+<script>
+  const cursor = document.getElementById('cursor');
+  window.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+  document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('scrollProgress').style.width = pct + '%';
+  });
+</script>
 </body>
 </html>

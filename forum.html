@@ -150,6 +150,7 @@
 <body>
 
 <div id="cursor"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <nav>
   <a href="index.html" class="logo"><img src="logo.svg?v=2" alt="Looks-Max" width="34" height="34"><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
@@ -167,7 +168,7 @@
   <h1 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,7vw,56px); margin-bottom:30px; background:linear-gradient(180deg,#fff 20%,var(--gold-bright) 60%,var(--gold) 100%); -webkit-background-clip:text; background-clip:text; color:transparent;">ФОРУМ</h1>
 
   <!-- Форма входа/регистрации (видна, когда не залогинен) -->
-  <div class="auth-box" id="authBox">
+  <div class="auth-box reveal" id="authBox">
     <input type="email" id="emailInput" placeholder="Email">
     <input type="password" id="passInput" placeholder="Пароль">
     <button class="btn-sm solid" id="loginBtn">Войти</button>
@@ -471,6 +472,27 @@
 
   const cursor = document.getElementById('cursor');
   window.addEventListener('mousemove', e => { cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px'; });
+  document.querySelectorAll('a, button, .post').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('scrollProgress').style.width = pct + '%';
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in'); revealObserver.unobserve(entry.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  new MutationObserver(() => {
+    document.querySelectorAll('.post:not(.reveal)').forEach(el => {
+      el.classList.add('reveal');
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('in')));
+    });
+  }).observe(feed, { childList: true });
 </script>
 </body>
 </html>
