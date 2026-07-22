@@ -51,8 +51,24 @@
   .btn-sm.solid { background: linear-gradient(120deg, var(--gold-bright), var(--gold)); color: #100b02; }
   .btn-sm.outline { background: none; border: 1px solid var(--line); color: #eee; }
   .btn-sm.outline:hover { border-color: var(--gold); }
-  .user-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+  .btn-sm.tiny { padding: 6px 12px; font-size: 12px; }
+  .user-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
+  .user-bar-left { display: flex; align-items: center; gap: 10px; }
   .user-bar span { color: var(--text-dim); font-size: 14px; }
+  .user-bar-actions { display: flex; gap: 8px; }
+
+  .profile-box {
+    display: none; padding: 20px; border: 1px solid var(--line); border-radius: 16px;
+    background: var(--bg-soft); margin-bottom: 30px;
+  }
+  .profile-box h3 { font-size: 14px; color: var(--gold-bright); margin-bottom: 12px; font-weight: 700; }
+  .profile-box .form-row { margin-bottom: 10px; }
+  .profile-box input {
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px 14px; color: #eee; font-size: 13px; font-family: 'Manrope', sans-serif;
+    outline: none; flex: 1; min-width: 160px;
+  }
+  .profile-box input:focus { border-color: var(--gold); }
 
   .post-form { display: none; margin-bottom: 40px; }
   .post-form textarea {
@@ -63,12 +79,12 @@
   }
   .post-form textarea:focus { border-color: var(--gold); }
   .form-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
-  .form-row select, .form-row input[type="url"] {
+  .form-row select, .form-row input[type="url"], .form-row input[type="text"] {
     background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
     padding: 10px 14px; color: #eee; font-size: 13px; font-family: 'Manrope', sans-serif;
     outline: none; flex: 1; min-width: 160px;
   }
-  .form-row select:focus, .form-row input[type="url"]:focus { border-color: var(--gold); }
+  .form-row select:focus, .form-row input:focus { border-color: var(--gold); }
   .emoji-bar { display: flex; gap: 2px; flex-wrap: wrap; margin-bottom: 10px; }
   .emoji-btn {
     font-size: 19px; background: none; border: none; cursor: pointer;
@@ -77,7 +93,8 @@
   .emoji-btn:hover { background: var(--bg); }
   .form-hint { font-size: 11px; color: var(--text-dim); margin-top: -6px; margin-bottom: 12px; }
 
-  .cat-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .toolbar-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 20px; }
+  .cat-filters { display: flex; gap: 8px; flex-wrap: wrap; }
   .cat-filter-btn {
     padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line);
     background: none; color: var(--text-dim); font-size: 12px; letter-spacing: 0.3px;
@@ -85,6 +102,10 @@
   }
   .cat-filter-btn:hover { color: #eee; }
   .cat-filter-btn.active { border-color: var(--gold); color: var(--gold-bright); background: rgba(212,175,106,0.1); }
+
+  .sort-tabs { display: flex; gap: 6px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px; padding: 4px; }
+  .sort-tab { padding: 7px 14px; border-radius: 999px; border: none; background: none; color: var(--text-dim); font-size: 12px; cursor: pointer; font-family: 'Manrope', sans-serif; }
+  .sort-tab.active { background: linear-gradient(120deg, var(--gold-bright), var(--gold)); color: #100b02; font-weight: 700; }
 
   .active-tag-bar {
     display: none; align-items: center; gap: 10px; margin-bottom: 20px;
@@ -106,7 +127,10 @@
     background: linear-gradient(135deg, var(--gold-bright), var(--gold));
     display: flex; align-items: center; justify-content: center;
     font-family: 'Bebas Neue', sans-serif; font-size: 19px; color: #100b02;
+    overflow: hidden;
   }
+  .avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-circle.sm { width: 30px; height: 30px; font-size: 14px; }
   .post-head-info { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
   .post-author { font-weight: 700; font-size: 14px; color: #fff; }
   .post-time { font-size: 11.5px; color: var(--text-dim); }
@@ -127,16 +151,31 @@
     display: block;
   }
   .post-footer { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
-  .like-btn {
+  .like-btn, .comment-toggle-btn {
     display: flex; align-items: center; gap: 7px;
     background: none; border: 1px solid var(--line); border-radius: 999px;
     padding: 7px 16px; color: var(--text-dim); font-size: 13px; cursor: pointer;
     font-family: 'Manrope', sans-serif; transition: border-color .2s, color .2s;
   }
-  .like-btn:hover { border-color: var(--gold); color: #eee; }
+  .like-btn:hover, .comment-toggle-btn:hover { border-color: var(--gold); color: #eee; }
   .like-btn.liked { border-color: var(--gold); color: var(--gold-bright); background: rgba(212,175,106,0.08); }
   .like-btn .heart { display: inline-block; transition: transform .15s; }
   .like-btn:active .heart { transform: scale(1.3); }
+
+  .comments-panel { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .comments-panel.open { display: block; }
+  .comment-item { display: flex; gap: 10px; margin-bottom: 14px; }
+  .comment-body { flex: 1; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+  .comment-author { font-size: 12.5px; font-weight: 700; color: #fff; }
+  .comment-time { font-size: 10.5px; color: var(--text-dim); margin-left: 8px; }
+  .comment-text { font-size: 13.5px; color: #d8d8db; line-height: 1.5; white-space: pre-wrap; word-break: break-word; margin-top: 3px; }
+  .comment-form { display: flex; gap: 8px; margin-top: 10px; }
+  .comment-form input {
+    flex: 1; background: var(--bg); border: 1px solid var(--line); border-radius: 999px;
+    padding: 9px 16px; color: #eee; font-size: 13px; font-family: 'Manrope', sans-serif; outline: none;
+  }
+  .comment-form input:focus { border-color: var(--gold); }
+  .comments-status { font-size: 12px; color: var(--text-dim); }
 
   .status-msg { color: var(--text-dim); font-size: 13px; text-align: center; padding: 20px 0; }
   .error-msg { color: #ff7a7a; font-size: 13px; margin-top: 8px; }
@@ -144,6 +183,7 @@
   @media (max-width: 600px) {
     .post-head { flex-wrap: wrap; }
     .cat-badge { order: 3; margin-left: 54px; margin-top: -8px; }
+    .toolbar-row { flex-direction: column; align-items: stretch; }
   }
 </style>
 </head>
@@ -179,8 +219,26 @@
 
   <!-- Панель залогиненного пользователя -->
   <div class="user-bar" id="userBar" style="display:none;">
-    <span>Ты вошёл как <strong id="userEmail" style="color:#fff;"></strong></span>
-    <button class="btn-sm outline" id="logoutBtn">Выйти</button>
+    <div class="user-bar-left">
+      <div class="avatar-circle sm" id="myAvatar"></div>
+      <span>Ты вошёл как <strong id="userEmail" style="color:#fff;"></strong></span>
+    </div>
+    <div class="user-bar-actions">
+      <button class="btn-sm outline tiny" id="editProfileBtn">Профиль</button>
+      <button class="btn-sm outline tiny" id="logoutBtn">Выйти</button>
+    </div>
+  </div>
+
+  <!-- Форма профиля -->
+  <div class="profile-box" id="profileBox">
+    <h3>Никнейм и аватар</h3>
+    <div class="form-row">
+      <input type="text" id="profileNickname" placeholder="Никнейм (вместо email)">
+      <input type="url" id="profileAvatar" placeholder="Ссылка на аватар (необязательно)">
+    </div>
+    <div class="form-hint">Ссылку на картинку можно взять с любого хостинга изображений (imgur.com и т.п.).</div>
+    <button class="btn-sm solid" id="saveProfileBtn">Сохранить</button>
+    <div class="error-msg" id="profileError"></div>
   </div>
 
   <!-- Форма поста -->
@@ -203,15 +261,23 @@
     <div class="error-msg" id="postError"></div>
   </div>
 
-  <!-- Фильтры по категориям -->
-  <div class="cat-filters" id="catFilters">
-    <button class="cat-filter-btn active" data-cat="Все">Все</button>
-    <button class="cat-filter-btn" data-cat="Общее">💬 Общее</button>
-    <button class="cat-filter-btn" data-cat="Softmax">🌿 Softmax</button>
-    <button class="cat-filter-btn" data-cat="Hardmax">⚕️ Hardmax</button>
-    <button class="cat-filter-btn" data-cat="Прогресс">📈 Прогресс</button>
-    <button class="cat-filter-btn" data-cat="Вопрос">❓ Вопрос</button>
-    <button class="cat-filter-btn" data-cat="Мемы">😂 Мемы</button>
+  <div class="toolbar-row">
+    <!-- Фильтры по категориям -->
+    <div class="cat-filters" id="catFilters">
+      <button class="cat-filter-btn active" data-cat="Все">Все</button>
+      <button class="cat-filter-btn" data-cat="Общее">💬 Общее</button>
+      <button class="cat-filter-btn" data-cat="Softmax">🌿 Softmax</button>
+      <button class="cat-filter-btn" data-cat="Hardmax">⚕️ Hardmax</button>
+      <button class="cat-filter-btn" data-cat="Прогресс">📈 Прогресс</button>
+      <button class="cat-filter-btn" data-cat="Вопрос">❓ Вопрос</button>
+      <button class="cat-filter-btn" data-cat="Мемы">😂 Мемы</button>
+    </div>
+
+    <!-- Сортировка -->
+    <div class="sort-tabs" id="sortTabs">
+      <button class="sort-tab active" data-sort="new">Новые</button>
+      <button class="sort-tab" data-sort="popular">Популярные</button>
+    </div>
   </div>
 
   <div class="active-tag-bar" id="activeTagBar">
@@ -262,12 +328,17 @@
   const authError = document.getElementById('authError');
   const userBar = document.getElementById('userBar');
   const userEmail = document.getElementById('userEmail');
+  const myAvatar = document.getElementById('myAvatar');
   const postForm = document.getElementById('postForm');
   const feed = document.getElementById('feed');
   const catFilters = document.getElementById('catFilters');
+  const sortTabs = document.getElementById('sortTabs');
   const activeTagBar = document.getElementById('activeTagBar');
   const activeTagLabel = document.getElementById('activeTagLabel');
   const clearTagBtn = document.getElementById('clearTagBtn');
+  const profileBox = document.getElementById('profileBox');
+  const editProfileBtn = document.getElementById('editProfileBtn');
+  const profileError = document.getElementById('profileError');
 
   const EMOJIS = ['🔥','💀','😂','😭','🗿','💪','🧬','⚡','👑','🎯','😏','🤨','💯','🥀','🫡','😤'];
   const emojiBar = document.getElementById('emojiBar');
@@ -286,9 +357,14 @@
   });
 
   let currentUser = null;
+  let myProfile = null;
   let allPosts = [];
+  let profilesCache = {};
   let activeCat = 'Все';
   let activeTag = null;
+  let sortMode = 'new';
+  const openCommentPanels = new Set();
+  const commentUnsubs = {};
 
   function extractTags(text) {
     const matches = text.match(/#[a-zA-Zа-яёА-ЯЁ0-9_]+/g);
@@ -303,6 +379,12 @@
     return html;
   }
 
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   function timeAgo(date) {
     const diffMs = Date.now() - date.getTime();
     const min = Math.floor(diffMs / 60000);
@@ -315,10 +397,26 @@
     return date.toLocaleDateString('ru-RU');
   }
 
+  function displayName(uid, fallbackEmail) {
+    const p = profilesCache[uid];
+    return (p && p.nickname) ? p.nickname : (fallbackEmail || 'аноним');
+  }
+
+  function avatarHtml(uid, fallbackEmail, size) {
+    const p = profilesCache[uid];
+    const cls = size === 'sm' ? 'avatar-circle sm' : 'avatar-circle';
+    if (p && p.avatarUrl) {
+      return `<div class="${cls}"><img src="${p.avatarUrl}" alt="" onerror="this.parentElement.textContent='${(fallbackEmail||'?').charAt(0).toUpperCase()}'"></div>`;
+    }
+    const initial = ((p && p.nickname) || fallbackEmail || '?').charAt(0).toUpperCase();
+    return `<div class="${cls}">${initial}</div>`;
+  }
+
   function renderFeed() {
-    let posts = allPosts;
+    let posts = allPosts.slice();
     if (activeCat !== 'Все') posts = posts.filter(p => (p.category || 'Общее') === activeCat);
     if (activeTag) posts = posts.filter(p => (p.tags || []).includes(activeTag));
+    if (sortMode === 'popular') posts.sort((a, b) => (b.likes || 0) - (a.likes || 0));
 
     activeTagBar.style.display = activeTag ? 'flex' : 'none';
     if (activeTag) activeTagLabel.textContent = activeTag;
@@ -330,16 +428,17 @@
     feed.innerHTML = '';
     posts.forEach(post => {
       const time = post.createdAt ? timeAgo(post.createdAt.toDate()) : '...';
-      const initial = (post.author || '?').charAt(0).toUpperCase();
       const liked = currentUser && (post.likedBy || []).includes(currentUser.uid);
       const likeCount = post.likes || 0;
+      const commentCount = post.commentCount || 0;
+      const isOpen = openCommentPanels.has(post.id);
       const div = document.createElement('div');
       div.className = 'post';
       div.innerHTML = `
         <div class="post-head">
-          <div class="avatar-circle">${initial}</div>
+          ${avatarHtml(post.authorUid, post.author)}
           <div class="post-head-info">
-            <span class="post-author">${post.author || 'аноним'}</span>
+            <span class="post-author">${displayName(post.authorUid, post.author)}</span>
             <span class="post-time">${time}</span>
           </div>
           <span class="cat-badge">${post.category || 'Общее'}</span>
@@ -350,14 +449,90 @@
           <button class="like-btn ${liked ? 'liked' : ''}" data-id="${post.id}">
             <span class="heart">${liked ? '❤️' : '🤍'}</span><span class="like-count">${likeCount}</span>
           </button>
+          <button class="comment-toggle-btn" data-id="${post.id}">💬 <span class="comment-count">${commentCount}</span></button>
+        </div>
+        <div class="comments-panel ${isOpen ? 'open' : ''}" id="comments-${post.id}">
+          <div class="comments-status">Загрузка комментариев…</div>
         </div>
       `;
       div.querySelectorAll('.tag').forEach(el => {
         el.addEventListener('click', () => { activeTag = el.dataset.tag; renderFeed(); window.scrollTo({top: 0, behavior:'smooth'}); });
       });
       div.querySelector('.like-btn').addEventListener('click', () => toggleLike(post));
+      div.querySelector('.comment-toggle-btn').addEventListener('click', () => toggleComments(post.id));
       feed.appendChild(div);
+      if (isOpen) loadComments(post.id);
     });
+  }
+
+  function toggleComments(postId) {
+    const panel = document.getElementById('comments-' + postId);
+    if (openCommentPanels.has(postId)) {
+      openCommentPanels.delete(postId);
+      panel.classList.remove('open');
+      if (commentUnsubs[postId]) { commentUnsubs[postId](); delete commentUnsubs[postId]; }
+    } else {
+      openCommentPanels.add(postId);
+      panel.classList.add('open');
+      loadComments(postId);
+    }
+  }
+
+  function loadComments(postId) {
+    const panel = document.getElementById('comments-' + postId);
+    if (!panel || commentUnsubs[postId]) return;
+    commentUnsubs[postId] = db.collection('posts').doc(postId).collection('comments')
+      .orderBy('createdAt', 'asc').limit(200)
+      .onSnapshot(snapshot => {
+        const comments = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderComments(postId, comments);
+      }, err => {
+        panel.querySelector('.comments-status') && (panel.innerHTML = '<div class="comments-status">Ошибка загрузки комментариев</div>');
+      });
+  }
+
+  function renderComments(postId, comments) {
+    const panel = document.getElementById('comments-' + postId);
+    if (!panel) return;
+    const list = comments.map(c => `
+      <div class="comment-item">
+        ${avatarHtml(c.authorUid, c.author, 'sm')}
+        <div class="comment-body">
+          <span class="comment-author">${displayName(c.authorUid, c.author)}</span><span class="comment-time">${c.createdAt ? timeAgo(c.createdAt.toDate()) : ''}</span>
+          <div class="comment-text">${escapeHtml(c.text || '')}</div>
+        </div>
+      </div>
+    `).join('') || '<div class="comments-status">Пока нет комментариев — стань первым.</div>';
+
+    const formHtml = currentUser ? `
+      <div class="comment-form">
+        <input type="text" placeholder="Написать комментарий…" id="commentInput-${postId}">
+        <button class="btn-sm solid tiny" id="commentSubmit-${postId}">→</button>
+      </div>
+    ` : '<div class="comments-status">Войди, чтобы комментировать.</div>';
+
+    panel.innerHTML = list + formHtml;
+
+    if (currentUser) {
+      const input = document.getElementById(`commentInput-${postId}`);
+      const submitBtn = document.getElementById(`commentSubmit-${postId}`);
+      const submit = () => {
+        const text = input.value.trim();
+        if (!text) return;
+        submitBtn.disabled = true;
+        db.collection('posts').doc(postId).collection('comments').add({
+          text: text,
+          author: currentUser.email,
+          authorUid: currentUser.uid,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+          input.value = '';
+          db.collection('posts').doc(postId).update({ commentCount: firebase.firestore.FieldValue.increment(1) });
+        }).finally(() => { submitBtn.disabled = false; });
+      };
+      submitBtn.addEventListener('click', submit);
+      input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+    }
   }
 
   function toggleLike(post) {
@@ -381,6 +556,14 @@
     btn.addEventListener('click', () => {
       activeCat = btn.dataset.cat;
       catFilters.querySelectorAll('.cat-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderFeed();
+    });
+  });
+  sortTabs.querySelectorAll('.sort-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      sortMode = btn.dataset.sort;
+      sortTabs.querySelectorAll('.sort-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderFeed();
     });
@@ -415,6 +598,27 @@
         .catch(err => authError.textContent = err.message);
     });
 
+    editProfileBtn.addEventListener('click', () => {
+      profileBox.style.display = profileBox.style.display === 'block' ? 'none' : 'block';
+      if (myProfile) {
+        document.getElementById('profileNickname').value = myProfile.nickname || '';
+        document.getElementById('profileAvatar').value = myProfile.avatarUrl || '';
+      }
+    });
+
+    document.getElementById('saveProfileBtn').addEventListener('click', () => {
+      if (!currentUser) return;
+      const nickname = document.getElementById('profileNickname').value.trim();
+      const avatarUrl = document.getElementById('profileAvatar').value.trim();
+      profileError.textContent = '';
+      db.collection('profiles').doc(currentUser.uid).set({
+        nickname: nickname || null,
+        avatarUrl: avatarUrl || null
+      }, { merge: true }).then(() => {
+        profileBox.style.display = 'none';
+      }).catch(err => profileError.textContent = err.message);
+    });
+
     auth.onAuthStateChanged(user => {
       currentUser = user;
       if (user) {
@@ -422,10 +626,19 @@
         userBar.style.display = 'flex';
         postForm.style.display = 'block';
         userEmail.textContent = user.email;
+        db.collection('profiles').doc(user.uid).onSnapshot(doc => {
+          myProfile = doc.data() || null;
+          profilesCache[user.uid] = myProfile || {};
+          myAvatar.innerHTML = (myProfile && myProfile.avatarUrl)
+            ? `<img src="${myProfile.avatarUrl}" alt="">`
+            : (user.email || '?').charAt(0).toUpperCase();
+          renderFeed();
+        });
       } else {
         authBox.style.display = 'flex';
         userBar.style.display = 'none';
         postForm.style.display = 'none';
+        profileBox.style.display = 'none';
       }
       renderFeed();
     });
@@ -448,11 +661,20 @@
         tags: extractTags(text),
         likes: 0,
         likedBy: [],
+        commentCount: 0,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
       }).then(() => {
         postTextEl.value = '';
         document.getElementById('postImageUrl').value = '';
       }).catch(err => postError.textContent = err.message);
+    });
+
+    // Подтягиваем профили всех авторов постов, чтобы показывать никнейм/аватар
+    db.collection('profiles').onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+        profilesCache[change.doc.id] = change.doc.data();
+      });
+      renderFeed();
     });
 
     db.collection('posts').orderBy('createdAt', 'desc').limit(100)
