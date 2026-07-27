@@ -151,6 +151,20 @@
     z-index: 300; transition: width .1s linear;
   }
   @media (pointer: coarse) { #cursor { display: none; } }
+  .pill-field { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: -1; }
+  .pill-fx {
+    position: absolute; width: 64px; height: 26px;
+    border: 1.5px solid rgba(212,175,106,0.55); border-radius: 999px;
+    background: linear-gradient(120deg, rgba(212,175,106,0.18), rgba(242,213,160,0.04));
+    box-shadow: 0 0 18px rgba(212,175,106,0.15); opacity: 0.5;
+  }
+  .pill-fx::after { content: ''; position: absolute; left: 50%; top: 15%; bottom: 15%; width: 1px; background: rgba(212,175,106,0.5); }
+  .pill-fx.p1 { width: 54px; height: 22px; top: 12%; left: 6%; transform: rotate(-28deg); animation: pillDrift1 22s ease-in-out infinite; }
+  .pill-fx.p2 { width: 74px; height: 30px; top: 62%; left: 14%; transform: rotate(18deg); animation: pillDrift2 26s ease-in-out infinite; animation-delay: -6s; }
+  .pill-fx.p3 { width: 46px; height: 19px; top: 20%; right: 10%; transform: rotate(35deg); animation: pillDrift1 19s ease-in-out infinite; animation-delay: -3s; }
+  @keyframes pillDrift1 { 0%,100% { transform: translate(0,0) rotate(-28deg); } 50% { transform: translate(26px,-34px) rotate(-18deg); } }
+  @keyframes pillDrift2 { 0%,100% { transform: translate(0,0) rotate(18deg); } 50% { transform: translate(-32px,24px) rotate(28deg); } }
+  @media (max-width: 700px) { .pill-fx.p3 { display: none; } }
   .term-head {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 10px;
@@ -201,6 +215,7 @@
 
 <div id="cursor"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
+<div class="pill-field"><div class="pill-fx p1"></div><div class="pill-fx p2"></div><div class="pill-fx p3"></div></div>
 
 <nav>
   <a href="index.html" class="logo"><img src="logo.svg?v=2" width="30" height="30" alt=""><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
@@ -256,7 +271,10 @@
   <div class="term reveal" data-cat="mindset"><div class="term-head"><h3>Harmony</h3><span class="cat">мышление</span></div><p>То, насколько хорошо сочетаются отдельные черты лица между собой — важнее, чем каждая черта по отдельности.</p></div>
   <div class="term reveal" data-cat="mindset"><div class="term-head"><h3>Dimorphism</h3><span class="cat">мышление</span></div><p>Половой диморфизм — выраженность отличий мужских/женских черт лица. Более выраженный диморфизм часто воспринимается как более привлекательный.</p></div>
 
-  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>PSL</h3><span class="cat">сленг</span></div><p>Шкала 1–10 для оценки чисто лицевой эстетики: симметрия, костная структура, гармония черт. Не учитывает тело, стиль или харизму — только лицо.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>PSL</h3><span class="cat">сленг</span></div><p>Изначально аббревиатура от PUAhate/SlutHate/Lookism — трёх форумов, где зародилась культура. Сейчас так называют саму шкалу 1–10 для оценки чисто лицевой эстетики: симметрия, костная структура, гармония черт. Тело, стиль и харизма не учитываются — только лицо.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Gymmaxxing</h3><span class="cat">сленг</span></div><p>Набор мышечной массы и улучшение композиции тела через тренировки и питание — самая доступная и рабочая часть softmaxxing.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>LDAR</h3><span class="cat">сленг</span></div><p>Lay Down And Rot — ироничное «лечь и сгнить», отказ от любого self-improvement. Используется как антипример: то, чего в сообществе делать не советуют.</p></div>
+  <div class="term reveal" data-cat="slang"><div class="term-head"><h3>KHHV</h3><span class="cat">сленг</span></div><p>Kissless Handholdless Hugless Virgin — самоироничная аббревиатура для описания нулевого романтического опыта, часто используется как шутка над собой.</p></div>
   <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Appeal</h3><span class="cat">сленг</span></div><p>Более широкая шкала 1–10: общая «привлекательность» человека целиком — лицо + тело + стиль + харизма + подача. Appeal и PSL путают именно потому, что оба измеряются в баллах 1–10, но PSL — это только геометрия лица, а Appeal — то, как человека воспринимают в реальной жизни. Можно иметь среднее лицо (PSL 6), но высокий Appeal (8) за счёт стиля, формы и уверенности — и наоборот.</p></div>
   <a class="psl-hint" href="https://facerate.ru" target="_blank">Точный PSL и Appeal по фото можно получить на facerate.ru</a>
   <div class="term reveal" data-cat="slang"><div class="term-head"><h3>Mog / Mogging</h3><span class="cat">сленг</span></div><p>Заметно превосходить кого-то внешностью, статусом или presence. «Он могнул всех в комнате». <a href="articles/mog-chto-znachit.html" style="color:var(--gold); font-size:12px;">Подробнее →</a></p></div>

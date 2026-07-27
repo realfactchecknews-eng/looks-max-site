@@ -617,6 +617,38 @@
   50% { transform: translate(-50px, -30px) scale(1.1); }
 }
 
+/* Золотые летающие пилюли на фоне */
+.pill-field { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.pill-fx {
+  position: absolute;
+  width: 64px; height: 26px;
+  border: 1.5px solid rgba(212,175,106,0.55);
+  border-radius: 999px;
+  background: linear-gradient(120deg, rgba(212,175,106,0.18), rgba(242,213,160,0.04));
+  box-shadow: 0 0 18px rgba(212,175,106,0.15);
+  opacity: 0.55;
+}
+.pill-fx::after {
+  content: ''; position: absolute; left: 50%; top: 15%; bottom: 15%;
+  width: 1px; background: rgba(212,175,106,0.5);
+}
+.pill-fx.p1 { width: 54px; height: 22px; top: 12%; left: 6%; transform: rotate(-28deg); animation: pillDrift1 22s ease-in-out infinite; }
+.pill-fx.p2 { width: 74px; height: 30px; top: 62%; left: 14%; transform: rotate(18deg); animation: pillDrift2 26s ease-in-out infinite; animation-delay: -6s; }
+.pill-fx.p3 { width: 46px; height: 19px; top: 20%; right: 10%; transform: rotate(35deg); animation: pillDrift1 19s ease-in-out infinite; animation-delay: -3s; }
+.pill-fx.p4 { width: 68px; height: 28px; top: 70%; right: 16%; transform: rotate(-15deg); animation: pillDrift2 24s ease-in-out infinite; animation-delay: -11s; }
+.pill-fx.p5 { width: 40px; height: 17px; top: 42%; left: 46%; transform: rotate(10deg); animation: pillDrift1 30s ease-in-out infinite; animation-delay: -8s; opacity: 0.35; }
+@keyframes pillDrift1 {
+  0%, 100% { transform: translate(0, 0) rotate(-28deg); }
+  50% { transform: translate(26px, -34px) rotate(-18deg); }
+}
+@keyframes pillDrift2 {
+  0%, 100% { transform: translate(0, 0) rotate(18deg); }
+  50% { transform: translate(-32px, 24px) rotate(28deg); }
+}
+@media (max-width: 700px) {
+  .pill-fx.p3, .pill-fx.p5 { display: none; }
+}
+
 /* 3D tilt cards */
 .tilt { transition: transform .25s ease-out, border-color .4s !important; }
 

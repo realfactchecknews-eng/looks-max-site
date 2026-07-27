@@ -100,6 +100,7 @@
     background: none; color: var(--text-dim); font-size: 12px; letter-spacing: 0.3px;
     cursor: pointer; font-family: 'Manrope', sans-serif; transition: border-color .2s, color .2s, background .2s;
   }
+  .cat-filter-btn img { height: 13px; vertical-align: -2px; margin-right: 4px; opacity: .85; }
   .cat-filter-btn:hover { color: #eee; }
   .cat-filter-btn.active { border-color: var(--gold); color: var(--gold-bright); background: rgba(212,175,106,0.1); }
 
@@ -191,6 +192,7 @@
 
 <div id="cursor"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
+<div class="pill-field" style="position:fixed; z-index:-1;"><div class="pill-fx p1"></div><div class="pill-fx p2"></div><div class="pill-fx p3"></div><div class="pill-fx p4"></div><div class="pill-fx p5"></div></div>
 
 <nav>
   <a href="index.html" class="logo"><img src="logo.svg?v=2" alt="Looks-Max" width="34" height="34"><span class="wordmark">LOOKS<span>&#8209;MAX</span></span></a>
@@ -247,12 +249,12 @@
     <textarea id="postText" placeholder="Что обсуждаем? Можно добавить #хештеги прямо в текст"></textarea>
     <div class="form-row">
       <select id="postCategory">
-        <option value="Общее">💬 Общее</option>
-        <option value="Softmax">🌿 Softmax</option>
-        <option value="Hardmax">⚕️ Hardmax</option>
-        <option value="Прогресс">📈 Прогресс</option>
-        <option value="Вопрос">❓ Вопрос</option>
-        <option value="Мемы">😂 Мемы</option>
+        <option value="Общее">Общее</option>
+        <option value="Softmax">Softmax</option>
+        <option value="Hardmax">Hardmax</option>
+        <option value="Прогресс">Прогресс</option>
+        <option value="Вопрос">Вопрос</option>
+        <option value="Мемы">Мемы</option>
       </select>
       <input type="url" id="postImageUrl" placeholder="Ссылка на картинку (необязательно)">
     </div>
@@ -265,12 +267,12 @@
     <!-- Фильтры по категориям -->
     <div class="cat-filters" id="catFilters">
       <button class="cat-filter-btn active" data-cat="Все">Все</button>
-      <button class="cat-filter-btn" data-cat="Общее">💬 Общее</button>
-      <button class="cat-filter-btn" data-cat="Softmax">🌿 Softmax</button>
-      <button class="cat-filter-btn" data-cat="Hardmax">⚕️ Hardmax</button>
-      <button class="cat-filter-btn" data-cat="Прогресс">📈 Прогресс</button>
-      <button class="cat-filter-btn" data-cat="Вопрос">❓ Вопрос</button>
-      <button class="cat-filter-btn" data-cat="Мемы">😂 Мемы</button>
+      <button class="cat-filter-btn" data-cat="Общее"><img src="images/icons/chat.svg" alt=""> Общее</button>
+      <button class="cat-filter-btn" data-cat="Softmax"><img src="images/icons/skincare.svg" alt=""> Softmax</button>
+      <button class="cat-filter-btn" data-cat="Hardmax"><img src="images/icons/scissors.svg" alt=""> Hardmax</button>
+      <button class="cat-filter-btn" data-cat="Прогресс"><img src="images/icons/chart.svg" alt=""> Прогресс</button>
+      <button class="cat-filter-btn" data-cat="Вопрос"><img src="images/icons/question.svg" alt=""> Вопрос</button>
+      <button class="cat-filter-btn" data-cat="Мемы"><img src="images/icons/laugh.svg" alt=""> Мемы</button>
     </div>
 
     <!-- Сортировка -->
