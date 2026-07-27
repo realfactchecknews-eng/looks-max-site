@@ -1,0 +1,21 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pfLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9ecc9"/><stop offset="100%" stop-color="#d4af6a"/>
+    </linearGradient>
+    <linearGradient id="pfDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b8944f"/><stop offset="100%" stop-color="#7d5f2c"/>
+    </linearGradient>
+    <linearGradient id="pfShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="pfClip"><rect x="8" y="20" width="48" height="24" rx="12"/></clipPath>
+  </defs>
+  <g clip-path="url(#pfClip)">
+    <rect x="8" y="20" width="24" height="24" fill="url(#pfDark)"/>
+    <rect x="32" y="20" width="24" height="24" fill="url(#pfLight)"/>
+    <rect x="8" y="20" width="48" height="10" fill="url(#pfShine)"/>
+  </g>
+  <rect x="8" y="20" width="48" height="24" rx="12" fill="none" stroke="#4a3a1a" stroke-width="1" stroke-opacity="0.5"/>
+</svg>

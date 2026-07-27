@@ -426,6 +426,7 @@
     box-shadow: 0 20px 50px -15px rgba(212,175,106,0.3), 0 0 35px -8px rgba(212,175,106,0.25);
   }
   .cat-icon { font-size: 34px; margin-bottom: 16px; }
+  .cat-icon img { width: 38px; height: 38px; display: block; }
   .cat-item h4 { font-size: 16px; margin-bottom: 8px; }
   .cat-item p { font-size: 13px; color: var(--text-dim); font-weight: 300; }
 
@@ -622,15 +623,11 @@
 .pill-fx {
   position: absolute;
   width: 64px; height: 26px;
-  border: 1.5px solid rgba(212,175,106,0.55);
-  border-radius: 999px;
-  background: linear-gradient(120deg, rgba(212,175,106,0.18), rgba(242,213,160,0.04));
-  box-shadow: 0 0 18px rgba(212,175,106,0.15);
-  opacity: 0.55;
-}
-.pill-fx::after {
-  content: ''; position: absolute; left: 50%; top: 15%; bottom: 15%;
-  width: 1px; background: rgba(212,175,106,0.5);
+  background-image: url('images/icons/pill-3d-flat.svg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+  opacity: 0.8;
 }
 .pill-fx.p1 { width: 54px; height: 22px; top: 12%; left: 6%; transform: rotate(-28deg); animation: pillDrift1 22s ease-in-out infinite; }
 .pill-fx.p2 { width: 74px; height: 30px; top: 62%; left: 14%; transform: rotate(18deg); animation: pillDrift2 26s ease-in-out infinite; animation-delay: -6s; }

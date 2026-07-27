@@ -1,0 +1,21 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="barLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9ecc9"/><stop offset="100%" stop-color="#d4af6a"/>
+    </linearGradient>
+    <linearGradient id="barMid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e2c383"/><stop offset="100%" stop-color="#b8944f"/>
+    </linearGradient>
+    <linearGradient id="barDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b8944f"/><stop offset="100%" stop-color="#7d5f2c"/>
+    </linearGradient>
+    <filter id="barShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#barShadow)">
+    <rect x="12" y="34" width="11" height="18" rx="3" fill="url(#barDark)"/>
+    <rect x="26.5" y="22" width="11" height="30" rx="3" fill="url(#barMid)"/>
+    <rect x="41" y="12" width="11" height="40" rx="3" fill="url(#barLight)"/>
+  </g>
+</svg>

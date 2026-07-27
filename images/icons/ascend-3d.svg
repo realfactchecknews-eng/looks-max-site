@@ -1,0 +1,17 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="chevLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f9ecc9"/><stop offset="100%" stop-color="#d4af6a"/>
+    </linearGradient>
+    <linearGradient id="chevDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b8944f"/><stop offset="100%" stop-color="#7d5f2c"/>
+    </linearGradient>
+    <filter id="chevShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g filter="url(#chevShadow)">
+    <path d="M32 10 L52 32 H40 L32 23 L24 32 H12 Z" fill="url(#chevLight)"/>
+    <path d="M32 30 L48 48 H37 L32 42 L27 48 H16 Z" fill="url(#chevDark)"/>
+  </g>
+</svg>
